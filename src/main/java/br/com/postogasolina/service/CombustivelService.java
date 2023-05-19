@@ -11,7 +11,7 @@ import br.com.postogasolina.repositories.CombustivelRepository;
 import br.com.postogasolina.service.exception.ObjectNotFoundException;
 
 /**
- * Classe para acessos aos serviÃ§os referente Ã  entidade CombustÃ­vel.
+ * Classe de acesso aos serviçoss referente à entidade Combustível.
  * 
  * @author Geraldo jorge - candidato5
  * 		   email: geraldo.gja@gmail.com
@@ -20,16 +20,16 @@ import br.com.postogasolina.service.exception.ObjectNotFoundException;
 public class CombustivelService {
 	
 	@Autowired
-	private CombustivelRepository combustivelRepository;
+	private CombustivelRepository repository;
 	
 	/**
 	 * Busca um Combustivel por Id
 	 * 
-	 * @param id
+	 * @param id - Long
 	 * @return Combustivel
 	 */
 	public Combustivel findById( Long id )  {	
-		Optional<Combustivel> obj = combustivelRepository.findById(id);	
+		Optional<Combustivel> obj = repository.findById(id);	
 		return obj.orElseThrow( () -> new ObjectNotFoundException(
 				"Objeto não encontrato! Id: " + id + ", Tipo: " + Combustivel.class.getName()) );
 	}
@@ -40,17 +40,38 @@ public class CombustivelService {
 	 * @return List<Combustivel> 
 	 */
 	public List<Combustivel> findAll() {
-		return combustivelRepository.findAll();
+		return repository.findAll();
 	}
 	
 	/**
-	 * Cria um Combustivel
+	 * Cria um combustivel
 	 * 
-	 * @param vombustivel
+	 * @param combustivel - Combustivel
 	 * @return Combustivel
 	 */
 	public Combustivel create( Combustivel combustivel ) {
-		return this.combustivelRepository.save(combustivel);
+		return this.repository.save(combustivel);
+	}
+	
+	/**
+	 * Atualiza um combustível
+	 * 
+	 * @param id - Long
+	 * @param obj - Combustivel
+	 * @return Combustivel
+	 */
+	public Combustivel update(Long id, Combustivel obj) {
+		Combustivel newObj = findById(id);
+		return repository.save(newObj);
+	}
+	
+	/**
+	 * Deleta um combustível
+	 * @param id - Long
+	 */
+	public void delete(Long id) {
+		Combustivel obj = findById(id);
+		repository.delete(obj);
 	}
 
 }
