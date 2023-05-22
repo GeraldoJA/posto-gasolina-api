@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="232401c1-1573-4bca-ba66-df41b07f3217">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="70"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -31,7 +31,7 @@
 		<band height="802" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="237" width="577" height="397" uuid="398f26e0-9f17-470e-818d-54e8ceaf18de"/>
-				<imageExpression><![CDATA["C:\\Users\\PESSOAL\\Desktop\\logo Logus - BG.png"]]></imageExpression>
+				<imageExpression><![CDATA["C:\\Users\\PESSOAL\\Documents\\Programação\\workspace Spring Tool\\posto-gasolina\\src\\main\\java\\br\\com\\postogasolina\\report\\ireport\\logo Logus - BG.png"]]></imageExpression>
 			</image>
 		</band>
 	</background>
@@ -54,8 +54,8 @@
 					<text><![CDATA[PROVA JAVA]]></text>
 				</staticText>
 				<image>
-					<reportElement x="20" y="10" width="162" height="45" uuid="9db268df-9072-451d-86d7-f141b60fe40f"/>
-					<imageExpression><![CDATA["C:\\Users\\PESSOAL\\Desktop\\logo Logus.jpg"]]></imageExpression>
+					<reportElement x="22" y="14" width="189" height="39" uuid="1fe60b24-adcf-46f1-add1-0d3c02523e24"/>
+					<imageExpression><![CDATA["C:\\Users\\PESSOAL\\Documents\\Programação\\workspace Spring Tool\\posto-gasolina\\src\\main\\java\\br\\com\\postogasolina\\report\\ireport\\logo Logus.jpg"]]></imageExpression>
 				</image>
 			</frame>
 			<staticText>
@@ -119,9 +119,47 @@
 	</detail>
 	<columnFooter>
 		<band height="263" splitType="Stretch">
+			<image>
+				<reportElement x="32" y="0" width="241" height="263" uuid="18890ee9-baeb-4403-8b40-7a54882aa97f"/>
+				<imageExpression><![CDATA["C:\\Users\\PESSOAL\\Documents\\Programação\\workspace Spring Tool\\posto-gasolina\\src\\main\\java\\br\\com\\postogasolina\\report\\ireport\\abastecimento - laranja - BG.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="24" width="273" height="20" uuid="4cad538d-361b-468a-ac90-f34f532c7b9f"/>
+				<textFieldExpression><![CDATA[$P{totalLitrosEtanal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="44" width="272" height="20" uuid="c1ea692e-ad09-49ca-bd77-e586b65fd0ed"/>
+				<textFieldExpression><![CDATA[$P{totalVendidoEtanal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-1" y="64" width="274" height="20" uuid="80ef0284-ae4e-4f97-be0d-0265e3f25b1d"/>
+				<textFieldExpression><![CDATA[$P{totalTempoAbastecendoEtanol}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="84" width="273" height="20" uuid="7c87fe41-58e7-4402-887d-6fcb8904fe3a"/>
+				<textFieldExpression><![CDATA[$P{totalLitrosGasolina}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-1" y="104" width="274" height="20" uuid="5c242b6a-49ac-48d0-aa9a-37493c46e437"/>
+				<textFieldExpression><![CDATA[$P{totalVendidoGasolina}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="124" width="272" height="20" uuid="a675629b-901d-4c35-bf27-45873b9cb2ad"/>
+				<textFieldExpression><![CDATA[$P{totalTempoAbastecendoGasolina}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="273" height="24" forecolor="#FF9900" backcolor="#FF9933" uuid="47d1acae-7e9f-4a48-8ce5-508131cd0ec0"/>
+				<staticText>
+					<reportElement x="2" y="0" width="189" height="24" forecolor="#FFFFFF" uuid="6f07b601-ca6b-4506-afa3-0bcafa9adb92"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[RESUMO]]></text>
+				</staticText>
+			</frame>
 			<barChart>
 				<chart>
-					<reportElement x="273" y="0" width="280" height="263" uuid="8815db27-dfa4-47fe-bb8e-6684b67c299d"/>
+					<reportElement x="275" y="0" width="280" height="263" uuid="8815db27-dfa4-47fe-bb8e-6684b67c299d"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
@@ -152,44 +190,6 @@
 					</valueAxisFormat>
 				</barPlot>
 			</barChart>
-			<image>
-				<reportElement x="32" y="0" width="241" height="263" uuid="18890ee9-baeb-4403-8b40-7a54882aa97f"/>
-				<imageExpression><![CDATA["C:\\Users\\PESSOAL\\Desktop\\abastecimento - laranja - BG.png"]]></imageExpression>
-			</image>
-			<textField>
-				<reportElement x="0" y="24" width="243" height="20" uuid="4cad538d-361b-468a-ac90-f34f532c7b9f"/>
-				<textFieldExpression><![CDATA[$P{totalLitrosEtanal}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="1" y="44" width="242" height="20" uuid="c1ea692e-ad09-49ca-bd77-e586b65fd0ed"/>
-				<textFieldExpression><![CDATA[$P{totalVendidoEtanal}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="-1" y="64" width="244" height="20" uuid="80ef0284-ae4e-4f97-be0d-0265e3f25b1d"/>
-				<textFieldExpression><![CDATA[$P{totalTempoAbastecendoEtanol}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="0" y="84" width="243" height="20" uuid="7c87fe41-58e7-4402-887d-6fcb8904fe3a"/>
-				<textFieldExpression><![CDATA[$P{totalLitrosGasolina}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="-1" y="104" width="244" height="20" uuid="5c242b6a-49ac-48d0-aa9a-37493c46e437"/>
-				<textFieldExpression><![CDATA[$P{totalVendidoGasolina}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="1" y="124" width="242" height="20" uuid="a675629b-901d-4c35-bf27-45873b9cb2ad"/>
-				<textFieldExpression><![CDATA[$P{totalTempoAbastecendoGasolina}]]></textFieldExpression>
-			</textField>
-			<frame>
-				<reportElement mode="Opaque" x="0" y="0" width="273" height="24" forecolor="#FF9900" backcolor="#FF9933" uuid="47d1acae-7e9f-4a48-8ce5-508131cd0ec0"/>
-				<staticText>
-					<reportElement x="2" y="0" width="189" height="24" forecolor="#FFFFFF" uuid="6f07b601-ca6b-4506-afa3-0bcafa9adb92"/>
-					<textElement>
-						<font size="14" isBold="true"/>
-					</textElement>
-					<text><![CDATA[RESUMO]]></text>
-				</staticText>
-			</frame>
 		</band>
 	</columnFooter>
 	<pageFooter>
