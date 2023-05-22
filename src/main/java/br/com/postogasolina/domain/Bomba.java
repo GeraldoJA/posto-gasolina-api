@@ -159,5 +159,10 @@ public class Bomba implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "B"+ id + " " + combustivel.getTipoCombustivel().name().toLowerCase() + " - preco: R$ " + preco;
+	}
+
 
 }

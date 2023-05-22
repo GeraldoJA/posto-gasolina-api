@@ -23,9 +23,6 @@ import br.com.postogasolina.service.VeiculoService;
 @Service
 public class AbastecimentoServiceTest {
 	
-	//@Autowired
-//	private PostoService postoService;
-	
 	@Autowired
 	private BombaService bombaService;
 	
@@ -33,7 +30,7 @@ public class AbastecimentoServiceTest {
 	private VeiculoService veiculoService;
 	
 	@Autowired
-	private AbastecimentoService abastecimentoervice;
+	private AbastecimentoService abastecimentoService;
 	
 	public void iniciar() {
 		
@@ -49,17 +46,25 @@ public class AbastecimentoServiceTest {
 		Bomba b1 = bombaService.findById(1L);
 		Bomba b2 = bombaService.findById(2L);
 
-		for (Veiculo veiculo : carros) {
+	//	for (Veiculo veiculo : carros) {
+		for ( int i = 0; i < carros.size(); i++ ) {
+			Veiculo veiculo = carros.get(i);
+			if(i == 2 )   //LIMITA EM 2 ABASTECIMENTOS
+				break;
+			
 			double random = Math.random();
 			
 			if(random > 0.0 && random < 0.5)			
-				this.abastecimentoervice.create(b1, veiculo, Double.valueOf( veiculo.getCapacidadeTanque() ) );
+				this.abastecimentoService.create(b1, veiculo, Double.valueOf( veiculo.getCapacidadeTanque() ) );
 			else if(random > 0.5 && random < 1.0)
-				this.abastecimentoervice.create(b2, veiculo, Double.valueOf( veiculo.getCapacidadeTanque() ));
+				this.abastecimentoService.create(b2, veiculo, Double.valueOf( veiculo.getCapacidadeTanque() ));
 			else {
-				this.abastecimentoervice.create(b1, veiculo, Double.valueOf( veiculo.getCapacidadeTanque() -5) );
-				this.abastecimentoervice.create(b2, veiculo, Double.valueOf( veiculo.getCapacidadeTanque() +5) );
+				this.abastecimentoService.create(b1, veiculo, Double.valueOf( veiculo.getCapacidadeTanque() / 2) );
+				this.abastecimentoService.create(b2, veiculo, Double.valueOf( veiculo.getCapacidadeTanque() / 2) );
 			}
+			
+			veiculo.setQtdCombustivel( veiculo.getCapacidadeTanque() );
+			veiculoService.update(veiculo.getId(), veiculo);
 		}
 			
 		System.out.println("testa Create Abastecimento");
@@ -68,10 +73,10 @@ public class AbastecimentoServiceTest {
 	
 	private void testaBuscaDeAbastecimentos() {
 		
-		List<Abastecimento> list = this.abastecimentoervice.findAll();
+		List<Abastecimento> list = this.abastecimentoService.findAll();
 		System.out.println("Busca todos");
 		
-		Abastecimento a1 = abastecimentoervice.findById(1L);
+		Abastecimento a1 = abastecimentoService.findById(1L);
 		
 		System.out.println("testa Busca De Bombas");
 		for (Abastecimento a : list) {
@@ -83,13 +88,12 @@ public class AbastecimentoServiceTest {
 	
 	public void resumoSimulacao() {
 		
-		List<String> list = abastecimentoervice.resumoAbastecimento();
-		System.out.println(" ");
-		System.out.println(" ");
-		System.out.println("- - RESUMO - - ");
+		List<String> list = abastecimentoService.relatorioCompletoAbastecimento();
+
 		for (String string : list) {
 			System.out.println(string);
 		}
+		
 		System.out.println(" ");
 		System.out.println(" ");
 	}

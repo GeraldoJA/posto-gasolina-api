@@ -1,10 +1,18 @@
 package br.com.postogasolina.config;
 
+import javax.swing.SwingUtilities;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import br.com.postogasolina.gui.TelaCard;
+import br.com.postogasolina.service.AbastecimentoService;
+import br.com.postogasolina.service.BombaService;
+import br.com.postogasolina.service.CombustivelService;
+import br.com.postogasolina.service.PostoService;
+import br.com.postogasolina.service.VeiculoService;
 import br.com.postogasolina.test.OrdemExecucaoTests;
 
 /**
@@ -17,13 +25,41 @@ import br.com.postogasolina.test.OrdemExecucaoTests;
 @Profile("test")
 public class TestConfig {
 
-
 	@Autowired
 	private OrdemExecucaoTests ordemExecucaoTests;
+	
+	@Autowired
+	private PostoService postoService;
+	
+	@Autowired
+	private VeiculoService veiculoService;
+	
+	@Autowired
+	private CombustivelService combustivelService;
+	
+	@Autowired
+	private BombaService bombaService;
+	
+	@Autowired
+	private AbastecimentoService abastecimentoService;
 	
 	@Bean
 	public void instanciaBD() {
 	
 		this.ordemExecucaoTests.iniciarTestIntegracaoBaseDados();
+		
+		iniciarTela();
+	}
+	
+	private void iniciarTela() {
+		
+		System.setProperty("java.awt.headless", "false");
+		SwingUtilities.invokeLater(() -> {
+	
+			TelaCard frame = new TelaCard(postoService, veiculoService, combustivelService, bombaService, abastecimentoService);
+			frame.setDefaultCloseOperation(TelaCard.EXIT_ON_CLOSE);
+			frame.setVisible(true);
+		});
+
 	}
 }

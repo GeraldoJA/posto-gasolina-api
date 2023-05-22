@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="232401c1-1573-4bca-ba66-df41b07f3217">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="789"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="PieChartDataset" uuid="52d83a6e-e3c4-4f8a-a1ee-f384b4ec01f0"/>
+	<parameter name="totalLitrosEtanal" class="java.lang.String"/>
+	<parameter name="totalVendidoEtanal" class="java.lang.String"/>
+	<parameter name="totalTempoAbastecendoEtanol" class="java.lang.String"/>
+	<parameter name="totalLitrosGasolina" class="java.lang.String"/>
+	<parameter name="totalVendidoGasolina" class="java.lang.String"/>
+	<parameter name="totalTempoAbastecendoGasolina" class="java.lang.String"/>
+	<parameter name="totalLitrosOutros" class="java.lang.String"/>
+	<parameter name="totalVendidoOutros" class="java.lang.String"/>
+	<parameter name="totalTempoAbastecendoOutros" class="java.lang.String"/>
+	<field name="data" class="java.lang.String"/>
+	<field name="infoCarro" class="java.lang.String"/>
+	<field name="placa" class="java.lang.String"/>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="qtdGasolina" class="java.lang.Double"/>
+	<field name="qtdAlcool" class="java.lang.Double"/>
+	<field name="valorGasto" class="java.lang.Double"/>
+	<background>
+		<band height="802" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="237" width="577" height="397" uuid="398f26e0-9f17-470e-818d-54e8ceaf18de"/>
+				<imageExpression><![CDATA["C:\\Users\\PESSOAL\\Documents\\Programação\\workspace Spring Tool\\posto-gasolina\\src\\main\\java\\br\\com\\postogasolina\\report\\ireport\\logo Logus - BG.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="16" y="490" width="245" height="263" uuid="18890ee9-baeb-4403-8b40-7a54882aa97f"/>
+				<imageExpression><![CDATA["C:\\Users\\PESSOAL\\Documents\\Programação\\workspace Spring Tool\\posto-gasolina\\src\\main\\java\\br\\com\\postogasolina\\report\\ireport\\abastecimento - laranja - BG.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="144" splitType="Stretch">
+			<staticText>
+				<reportElement style="SubTitle" x="0" y="65" width="273" height="29" forecolor="#666666" uuid="0561b5cb-2241-44ae-b0a6-3b54d1daa294"/>
+				<textElement textAlignment="Left">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Geraldo Jorge - Candidato 5]]></text>
+			</staticText>
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="0" width="597" height="65" forecolor="#006699" backcolor="#003366" uuid="70e27456-0b29-446f-8f57-56dea3966920"/>
+				<staticText>
+					<reportElement style="Title" x="229" y="14" width="346" height="51" uuid="b438efd9-6066-4946-bafc-15af18d4d023"/>
+					<textElement textAlignment="Right">
+						<font fontName="BankGothic Md BT" size="32" isBold="false"/>
+					</textElement>
+					<text><![CDATA[PROVA JAVA]]></text>
+				</staticText>
+				<image>
+					<reportElement x="22" y="14" width="189" height="39" uuid="1fe60b24-adcf-46f1-add1-0d3c02523e24"/>
+					<imageExpression><![CDATA["C:\\Users\\PESSOAL\\Documents\\Programação\\workspace Spring Tool\\posto-gasolina\\src\\main\\java\\br\\com\\postogasolina\\report\\ireport\\logo Logus.jpg"]]></imageExpression>
+				</image>
+			</frame>
+			<staticText>
+				<reportElement x="2" y="94" width="110" height="40" forecolor="#666666" uuid="5d1154c1-8e5d-4751-9273-dbaa8828baf7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FullStack-Developer (88) 9 9999-6947 geraldo.gmail.com.com                                    ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="554" height="23" backcolor="#FF9933" uuid="358dda7f-96c2-4884-9da8-f43622ed0758"/>
+			</frame>
+			<staticText>
+				<reportElement x="0" y="0" width="69" height="18" forecolor="#FFFFFF" uuid="3d99ab30-eb0a-469d-925a-8b07491ed943"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="69" y="0" width="175" height="18" forecolor="#FFFFFF" uuid="7c1e2e80-9753-48c1-a099-2218ad071dee"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CARRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="0" width="310" height="18" forecolor="#FFFFFF" uuid="88ff07c3-763a-43e5-b4af-94069b8ea9db"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIÇÃO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="20" width="553" height="3" forecolor="#FF9900" uuid="2988f0ae-4f38-44d6-8179-a2ec8e594e05"/>
+			</line>
+			<textField>
+				<reportElement x="1" y="0" width="68" height="20" uuid="4389e8dc-2142-4600-bb17-7adc2b9441f2"/>
+				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="0" width="175" height="20" uuid="0e6cdcc9-11b3-4834-b80d-03675b4b14a0"/>
+				<textFieldExpression><![CDATA[$F{infoCarro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="244" y="0" width="309" height="20" uuid="ff0a10d4-6170-45ed-95c7-440a55d7d305"/>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="263" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="30" width="271" height="20" uuid="4cad538d-361b-468a-ac90-f34f532c7b9f"/>
+				<textFieldExpression><![CDATA[$P{totalLitrosEtanal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="50" width="271" height="20" uuid="c1ea692e-ad09-49ca-bd77-e586b65fd0ed"/>
+				<textFieldExpression><![CDATA[$P{totalVendidoEtanal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="70" width="271" height="20" uuid="80ef0284-ae4e-4f97-be0d-0265e3f25b1d"/>
+				<textFieldExpression><![CDATA[$P{totalTempoAbastecendoEtanol}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="90" width="271" height="20" uuid="7c87fe41-58e7-4402-887d-6fcb8904fe3a"/>
+				<textFieldExpression><![CDATA[$P{totalLitrosGasolina}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="110" width="269" height="20" uuid="5c242b6a-49ac-48d0-aa9a-37493c46e437"/>
+				<textFieldExpression><![CDATA[$P{totalVendidoGasolina}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="130" width="271" height="20" uuid="a675629b-901d-4c35-bf27-45873b9cb2ad"/>
+				<textFieldExpression><![CDATA[$P{totalTempoAbastecendoGasolina}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="271" height="29" forecolor="#FF9900" backcolor="#FF9933" uuid="47d1acae-7e9f-4a48-8ce5-508131cd0ec0"/>
+				<staticText>
+					<reportElement x="0" y="5" width="166" height="24" forecolor="#FFFFFF" uuid="6f07b601-ca6b-4506-afa3-0bcafa9adb92"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[RESUMO]]></text>
+				</staticText>
+			</frame>
+			<barChart>
+				<chart>
+					<reportElement x="273" y="1" width="278" height="262" uuid="8815db27-dfa4-47fe-bb8e-6684b67c299d"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Total gasto"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{placa}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{valorGasto}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot isShowLabels="true">
+					<plot orientation="Horizontal">
+						<seriesColor seriesOrder="0" color="#003399"/>
+						<seriesColor seriesOrder="1" color="#33CCFF"/>
+					</plot>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<textField>
+				<reportElement x="0" y="150" width="271" height="20" uuid="070fdf41-c4f0-49fc-a0c8-14336949b8ca"/>
+				<textFieldExpression><![CDATA[$P{totalLitrosOutros}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="170" width="271" height="20" uuid="81c37ba2-8dea-40f4-9a2d-a365077cb5ac"/>
+				<textFieldExpression><![CDATA[$P{totalVendidoOutros}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="190" width="270" height="20" uuid="8d037659-da71-4c16-b416-120cc1309702"/>
+				<textFieldExpression><![CDATA[$P{totalTempoAbastecendoOutros}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="2" y="0" width="555" height="22" forecolor="#D0B48E" backcolor="#003366" uuid="96022e80-0277-4dd5-9758-1b332dd93149"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="496" y="0" width="55" height="22" forecolor="#FFFFFF" uuid="68f00fee-067b-454e-9e95-07a2db1e005b"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="0" width="63" height="22" forecolor="#FFFFFF" uuid="e242aeaf-a0c1-43bf-95b1-7cc56686c166"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="10" y="0" width="132" height="22" forecolor="#FFFFFF" uuid="3e5002c4-fdf4-4939-8e8d-c40aae826c23"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
