@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 
 import br.com.postogasolina.service.AbastecimentoService;
 import br.com.postogasolina.service.BombaService;
+import br.com.postogasolina.service.CombustivelService;
+import br.com.postogasolina.service.PostoService;
 import br.com.postogasolina.service.VeiculoService;
 
 public class TelaCard extends JFrame {
@@ -34,7 +36,8 @@ public class TelaCard extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaCard( VeiculoService veiculoService, BombaService bombaService, AbastecimentoService abastecimentoService ) {
+	public TelaCard( PostoService postoService, VeiculoService veiculoService, 
+			CombustivelService combustivelService, BombaService bombaService, AbastecimentoService abastecimentoService ) {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -111,13 +114,13 @@ public class TelaCard extends JFrame {
 		painelCards = new JPanel();
 		painelCards.setLayout(new CardLayout(0, 0));
 	
-		cardVeiculo = new TelaVeiculo();
+		cardVeiculo = new TelaVeiculo( veiculoService );
 		painelCards.add( cardVeiculo, "cardVeiculo" );
 		
-		cardCombustivel = new TelaCombustivel();
+		cardCombustivel = new TelaCombustivel(combustivelService);
 		painelCards.add( cardCombustivel, "cardCombustivel" );
 		
-		cardBomba = new TelaBomba();
+		cardBomba = new TelaBomba( postoService, combustivelService, bombaService );
 		painelCards.add( cardBomba, "cardBomba" );
 		
 		cardRelatorio = new TelaRelatorio( abastecimentoService );
@@ -146,6 +149,7 @@ public class TelaCard extends JFrame {
 				
 			case "Bomba":
 				c.show( painelCards, "cardBomba");
+				cardBomba.iniciarCombos();
 				break;	
 				
 			case "Combustivel":
@@ -154,6 +158,7 @@ public class TelaCard extends JFrame {
 			
 			case "Abastecer":
 				c.show( painelCards, "cardAbastecer");
+				cardAbastecer.iniciarCombos();
 				break;
 				
 			case "Relatório":

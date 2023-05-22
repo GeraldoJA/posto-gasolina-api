@@ -1,5 +1,6 @@
 package br.com.postogasolina.gui;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -8,15 +9,13 @@ import java.util.List;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import br.com.postogasolina.dto.AbastecimentoDTO;
 import br.com.postogasolina.report.control.Relatorio;
 import br.com.postogasolina.service.AbastecimentoService;
 import net.sf.jasperreports.engine.JRException;
-import javax.swing.JLabel;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.Font;
 
 public class TelaRelatorio extends JPanel {
 

@@ -130,7 +130,7 @@ public class TelaAbastecer extends JPanel {
 			abastecimentoService.create(bomba, veiculo, qtdLitros);
 			
 			String mensagem = veiculo.toString() + " abasteceu " + qtdLitros + " litros de " + bomba.toString();
-			JOptionPane.showMessageDialog(null, mensagem);
+			JOptionPane.showMessageDialog(null, mensagem, "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
 		}else {
 			JOptionPane.showMessageDialog(null, "Precisa informar a quantidade de litros", "ERRO", JOptionPane.WARNING_MESSAGE);
 		}
@@ -144,7 +144,8 @@ public class TelaAbastecer extends JPanel {
 	
 	private void inicarComboBoxCarro() {
 		
-		//comboBoxCarro.removeAll(); //limpar comboBox
+		comboBoxCarro.removeAllItems();  //limpar comboBox
+		
 		List<Veiculo> list = veiculoService.findAll();
 		for (Veiculo veiculo : list) {
 			comboBoxCarro.addItem(veiculo);
@@ -153,7 +154,8 @@ public class TelaAbastecer extends JPanel {
 	
 	private void inicarComboBoxBomba() {
 		
-		//comboBoxBomba.removeAll(); //limpar comboBox
+		comboBoxBomba.removeAllItems(); //limpar comboBox
+		
 		List<Bomba> list = bombaService.findAll();
 		for (Bomba bomba : list) {
 			comboBoxBomba.addItem(bomba);
