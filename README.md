@@ -1,5 +1,8 @@
 # posto-gasolina-api
 
+## Explicação do projeto
+https://www.youtube.com/watch?v=Qkq_JTJjoAQ
+
 ## Configuração do projeto no Spring Tools ou Eclipse
  O projeto reseta para Java 1.5 sempre que compila.
 Issa gera erro na função lambda do orElseThrow dos métodos finById.
