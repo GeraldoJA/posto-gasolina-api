@@ -132,6 +132,8 @@ public class TelaCard extends JFrame {
 		cardAbastecer = new TelaAbastecer(veiculoService, bombaService, abastecimentoService);
 		painelCards.add( cardAbastecer, "cardAbastecer" );
 		
+		((CardLayout) painelCards.getLayout()).show( painelCards, "cardSobre");
+		
 		getContentPane().add(painelCards, BorderLayout.CENTER);
 
 	}

@@ -160,10 +160,13 @@ public class TelaVeiculo extends JPanel {
 		veiculo.setNome( tfNome.getText() ); 
 		veiculo.setPlaca( tfPlaca.getText() );
 		
-		if(tfCapacidade.getText().equals("") )
-			veiculo.setCapacidadeTanque( 0 );
-		else	
-			veiculo.setCapacidadeTanque( Integer.parseInt(tfCapacidade.getText()) ); 
+		if(tfCapacidade.getText().equals("") ) {
+			veiculo.setCapacidadeTanque( 0.0 );
+			veiculo.setQtdCombustivel( 0.0 );
+		}else {
+			veiculo.setCapacidadeTanque( Double.parseDouble(tfCapacidade.getText()) ); 
+			veiculo.setQtdCombustivel( 0.0 );
+		}
 		
 		if( veiculo.getModelo().length() < 2 || veiculo.getModelo().length() > 30 )
 			JOptionPane.showMessageDialog(null, "Modelo precisa ter entre 2 e 30 caracteres", "ERRO", JOptionPane.WARNING_MESSAGE);

@@ -44,6 +44,15 @@ public class VeiculoService {
 	}
 	
 	/**
+	 * Busca todos os veiculos ainda não abastecidos
+	 * 
+	 * @return List<Veiculo> 
+	 */
+	public List<Veiculo> buscarTodosNaoAbastecidos() {
+		return veiculoRepository.buscarTodosNaoAbastecidos();
+	}
+	
+	/**
 	 * Cria um veiculo
 	 * 
 	 * @param veiculo
@@ -65,6 +74,9 @@ public class VeiculoService {
 		Veiculo obj = findById(id);
 		obj.setModelo( veiculo.getModelo() );
 		obj.setNome( veiculo.getNome() );
+		obj.setPlaca( veiculo.getPlaca() );
+		obj.setCapacidadeTanque( veiculo.getCapacidadeTanque() );
+		obj.setQtdCombustivel( veiculo.getQtdCombustivel() );
 		
 		return veiculoRepository.save(obj);
 	}

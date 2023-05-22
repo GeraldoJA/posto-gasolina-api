@@ -23,9 +23,6 @@ import br.com.postogasolina.service.VeiculoService;
 @Service
 public class AbastecimentoServiceTest {
 	
-	//@Autowired
-//	private PostoService postoService;
-	
 	@Autowired
 	private BombaService bombaService;
 	
@@ -49,7 +46,12 @@ public class AbastecimentoServiceTest {
 		Bomba b1 = bombaService.findById(1L);
 		Bomba b2 = bombaService.findById(2L);
 
-		for (Veiculo veiculo : carros) {
+	//	for (Veiculo veiculo : carros) {
+		for ( int i = 0; i < carros.size(); i++ ) {
+			Veiculo veiculo = carros.get(i);
+			if(i == 2 )   //LIMITA EM 2 ABASTECIMENTOS
+				break;
+			
 			double random = Math.random();
 			
 			if(random > 0.0 && random < 0.5)			
@@ -60,6 +62,9 @@ public class AbastecimentoServiceTest {
 				this.abastecimentoService.create(b1, veiculo, Double.valueOf( veiculo.getCapacidadeTanque() / 2) );
 				this.abastecimentoService.create(b2, veiculo, Double.valueOf( veiculo.getCapacidadeTanque() / 2) );
 			}
+			
+			veiculo.setQtdCombustivel( veiculo.getCapacidadeTanque() );
+			veiculoService.update(veiculo.getId(), veiculo);
 		}
 			
 		System.out.println("testa Create Abastecimento");

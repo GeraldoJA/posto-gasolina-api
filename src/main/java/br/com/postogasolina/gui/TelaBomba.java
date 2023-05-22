@@ -2,37 +2,31 @@ package br.com.postogasolina.gui;
 
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 import br.com.postogasolina.domain.Bomba;
 import br.com.postogasolina.domain.Combustivel;
 import br.com.postogasolina.domain.Posto;
 import br.com.postogasolina.domain.TipoCombustivel;
-import br.com.postogasolina.domain.Veiculo;
 import br.com.postogasolina.service.BombaService;
 import br.com.postogasolina.service.CombustivelService;
 import br.com.postogasolina.service.PostoService;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class TelaBomba extends JPanel {
 
@@ -216,7 +210,7 @@ public class TelaBomba extends JPanel {
 	private void criarBomba() {
 		
 		Posto posto = (Posto) comboPosto.getSelectedItem();;
-		Combustivel Combustivel = (Combustivel) comboCombustivel.getSelectedItem();
+		Combustivel combustivel = (Combustivel) comboCombustivel.getSelectedItem();
 		Bomba bomba;
 		
 		if( tfPreco.getText().equals("") )
@@ -225,16 +219,17 @@ public class TelaBomba extends JPanel {
 			JOptionPane.showMessageDialog(null, "Precisa informar o tempo de abastecimento por litro", "ERRO", JOptionPane.WARNING_MESSAGE);
 		else {
 			
-			if( Combustivel.getTipoCombustivel() == TipoCombustivel.ALCOOL ) 
-				bomba = new Bomba(null, PRECO_ALCOOL, VELOCIDADE_ALCOOL, Combustivel, posto);
-			else if( Combustivel.getTipoCombustivel() == TipoCombustivel.GASOLINA_COMUM )	
-				bomba = new Bomba(null, PRECO_GASOLINA, VELOCIDADE_GASOLINA, Combustivel, posto);
+			if( combustivel.getTipoCombustivel() == TipoCombustivel.ALCOOL ) 
+				bomba = new Bomba(null, PRECO_ALCOOL, VELOCIDADE_ALCOOL, combustivel, posto);
+			else if( combustivel.getTipoCombustivel() == TipoCombustivel.GASOLINA_COMUM )	
+				bomba = new Bomba(null, PRECO_GASOLINA, VELOCIDADE_GASOLINA, combustivel, posto);
 			else {
 				Double preco = Double.parseDouble( tfPreco.getText() );
 				Integer velocidade = Integer.parseInt( tfTempo.getText() );
-				bomba = new Bomba(null, preco, velocidade, Combustivel, posto);
+				bomba = new Bomba(null, preco, velocidade, combustivel, posto);
 			}
 			
+			bombaService.create(bomba, combustivel, posto);
 			String mensagem = "Bomba de " + bomba + " criada com sucesso.";
 			JOptionPane.showMessageDialog(null, mensagem, "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
 			limpar();

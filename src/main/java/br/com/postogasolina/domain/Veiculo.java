@@ -39,7 +39,9 @@ public class Veiculo implements Serializable {
 	@Length(min = 1, max = 20, message = "O campo PLACA deve ter entre 1 e 20 caracteres")
 	private String placa;
 	
-	private Integer capacidadeTanque;
+	private Double capacidadeTanque;
+	
+	private Double qtdCombustivel;
 	
 	/**
 	 * Construtor padrão.
@@ -58,13 +60,15 @@ public class Veiculo implements Serializable {
 	 * @param placa - String
 	 * @param capacidadeTanque - Integer
 	 */
-	public Veiculo(Long id, String modelo, String nome, String placa, Integer capacidadeTanque) {
+	public Veiculo(Long id, String modelo, String nome,
+			String placa, Double capacidadeTanque, Double qtdCombustivel) {
 		super();
 		this.id = id;
 		this.modelo = modelo;
 		this.nome = nome;
 		this.placa = placa;
 		this.capacidadeTanque = capacidadeTanque;
+		this.qtdCombustivel = qtdCombustivel;
 	}
 
 	/**
@@ -126,14 +130,14 @@ public class Veiculo implements Serializable {
 	/**
 	 * @return the capacidadeTanque
 	 */
-	public Integer getCapacidadeTanque() {
+	public Double getCapacidadeTanque() {
 		return capacidadeTanque;
 	}
 
 	/**
 	 * @param capacidadeTanque the capacidadeTanque to set
 	 */
-	public void setCapacidadeTanque(Integer capacidadeTanque) {
+	public void setCapacidadeTanque(Double capacidadeTanque) {
 		this.capacidadeTanque = capacidadeTanque;
 	}
 
@@ -164,6 +168,20 @@ public class Veiculo implements Serializable {
 	@Override
 	public String toString() {
 		return modelo + " " + nome + ", placa: " + placa;
+	}
+
+	/**
+	 * @return the qtdCombustivel
+	 */
+	public Double getQtdCombustivel() {
+		return qtdCombustivel;
+	}
+
+	/**
+	 * @param qtdCombustivel the qtdCombustivel to set
+	 */
+	public void setQtdCombustivel(Double qtdCombustivel) {
+		this.qtdCombustivel = qtdCombustivel;
 	}
 
 

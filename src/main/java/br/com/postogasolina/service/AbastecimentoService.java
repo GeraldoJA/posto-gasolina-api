@@ -82,6 +82,10 @@ public class AbastecimentoService {
 		Double totalVendidoGasolina = 0.0;
 		Double totalTempoAbastecendoGasolina = 0.0;
 			
+		Double totalLitrosOutros = 0.0;
+		Double totalVendidoOutros = 0.0;
+		Double totalTempoAbastecendoOutros = 0.0;
+		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy-hh:mm");	
 		List<String> list = new ArrayList<String>();
 		list.add("\n ##### ABASTECIMETNOS ##### \n");
@@ -102,17 +106,25 @@ public class AbastecimentoService {
 				totalLitrosGasolina += a.getValor();
 				totalVendidoGasolina += a.getQuantidadeLitros();
 				totalTempoAbastecendoGasolina =+ a.getQuantidadeLitros() / a.getBomba().getVelocidadeAbastecimento();
+			}else {
+				totalLitrosOutros += a.getQuantidadeLitros();
+				totalVendidoOutros += a.getValor();
+				totalTempoAbastecendoOutros += a.getQuantidadeLitros() / a.getBomba().getVelocidadeAbastecimento();
 			}
 		}
 		
 		list.add("\n ##### RESUMO DA SIMULAÇÃO ##### \n ");
 		list.add("Total de litros de ETANOL abasteido = " + totalLitrosEtanal);
 		list.add("Total de vendido de ETANOL = " + totalVendidoEtanal);
-		list.add("Total de duranção abastecendo ETANOL = " + totalTempoAbastecendoEtanol);
+		list.add("Tempoo abastecendo ETANOL = " + totalTempoAbastecendoEtanol);
 		
 		list.add("Total de litros de GASOLINA abasteido = " + totalLitrosGasolina);
 		list.add("Total de vendido de GASOLINA = " + totalVendidoGasolina);
-		list.add("Total de duranção abastecendo GASOLINA = " + totalTempoAbastecendoGasolina);		
+		list.add("Tempo abastecendo GASOLINA = " + totalTempoAbastecendoGasolina);		
+		
+		list.add("Total de litros de OUTROS COMBUSTÍVEIS abasteido = " + totalLitrosOutros);
+		list.add("Total de vendido de OUTROS COMBUSTÍVEIS = " + totalVendidoOutros);
+		list.add("Tempo abastecendo OUTROS COMBUSTÍVEIS = " + totalTempoAbastecendoOutros);	
 
 		return list;
 	}
@@ -128,6 +140,10 @@ public class AbastecimentoService {
 		Double totalLitrosGasolina = 0.0;
 		Double totalVendidoGasolina = 0.0;
 		Double totalTempoAbastecendoGasolina = 0.0;
+		
+		Double totalLitrosOutros = 0.0;
+		Double totalVendidoOutros = 0.0;
+		Double totalTempoAbastecendoOutros = 0.0;
 			
 		HashMap<String,Object> params = new HashMap<String,Object>();	
 						
@@ -142,16 +158,33 @@ public class AbastecimentoService {
 				totalLitrosGasolina += a.getQuantidadeLitros();
 				totalVendidoGasolina += a.getValor();
 				totalTempoAbastecendoGasolina =+ a.getQuantidadeLitros() / a.getBomba().getVelocidadeAbastecimento();
+			}else {
+				totalLitrosOutros += a.getQuantidadeLitros();
+				totalVendidoOutros += a.getValor();
+				totalTempoAbastecendoOutros += a.getQuantidadeLitros() / a.getBomba().getVelocidadeAbastecimento();
 			}
 		}
 		
-		params.put( "totalLitrosEtanal", "Total de litros de ETANOL abasteido = " + new DecimalFormat(".##").format(totalLitrosEtanal) );
-		params.put( "totalVendidoEtanal", "Total de vendido de ETANOL = " + new DecimalFormat(".##").format(totalVendidoEtanal) );
-		params.put( "totalTempoAbastecendoEtanol", "Total de duranção abastecendo ETANOL = " + new DecimalFormat(".##").format(totalTempoAbastecendoEtanol)  + " minutos");
+		params.put( "totalLitrosEtanal", 
+				"Total de litros de ETANOL abasteido = " + new DecimalFormat(".##").format(totalLitrosEtanal) );
+		params.put( "totalVendidoEtanal", 
+				"Total de vendido de ETANOL = " + new DecimalFormat(".##").format(totalVendidoEtanal) );
+		params.put( "totalTempoAbastecendoEtanol", 
+				"Tempo abastecendo ETANOL = " + new DecimalFormat(".##").format(totalTempoAbastecendoEtanol)  + " minutos");
 		
-		params.put( "totalLitrosGasolina", "Total de litros de GASOLINA abasteido = " + new DecimalFormat(".##").format(totalLitrosGasolina) );
-		params.put( "totalVendidoGasolina", "Total de vendido de GASOLINA = " + new DecimalFormat(".##").format(totalVendidoGasolina) );
-		params.put( "totalTempoAbastecendoGasolina", "Total de duranção abastecendo GASOLINA = " + new DecimalFormat(".##").format(totalTempoAbastecendoGasolina)  + " minutos");		
+		params.put( "totalLitrosGasolina", 
+				"Total de litros de GASOLINA abasteido = " + new DecimalFormat(".##").format(totalLitrosGasolina) );
+		params.put( "totalVendidoGasolina", 
+				"Total de vendido de GASOLINA = " + new DecimalFormat(".##").format(totalVendidoGasolina) );
+		params.put( "totalTempoAbastecendoGasolina", 
+				"Tempo abastecendo GASOLINA = " + new DecimalFormat(".##").format(totalTempoAbastecendoGasolina)  + " minutos");		
+		
+		params.put( "totalLitrosOutros", 
+				"Total de litros de OUTROS COMBUSTÍVEIS abasteido = " + new DecimalFormat(".##").format(totalLitrosOutros) );
+		params.put( "totalVendidoOutros", 
+				"Total de vendido de OUTROS COMBUSTÍVEIS = " + new DecimalFormat(".##").format(totalVendidoOutros) );
+		params.put( "totalTempoAbastecendoOutros", 
+				"Tempo abastecendo OUTROS COMBUSTÍVEIS = " + new DecimalFormat(".##").format(totalTempoAbastecendoOutros)  + " minutos");	
 
 		return params;
 	}
