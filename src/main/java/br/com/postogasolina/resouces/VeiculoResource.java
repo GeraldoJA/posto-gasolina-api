@@ -19,50 +19,56 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.postogasolina.domain.Combustivel;
-import br.com.postogasolina.service.CombustivelService;
-
+import br.com.postogasolina.domain.Veiculo;
+import br.com.postogasolina.service.VeiculoService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping(value = "/combustiveis")
-public class CombustivelResource {
-
+@RequestMapping(value = "/veiculos")
+public class VeiculoResource {
+	
 	@Autowired
-	private CombustivelService service;
+	private VeiculoService service;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Combustivel> findById(@PathVariable Long id) {	
+	public ResponseEntity<Veiculo> findById(@PathVariable Long id) {	
 		
-		Combustivel obj = service.findById(id);
+		Veiculo obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@GetMapping
-	public ResponseEntity< List<Combustivel> > findAll( ) {
+	public ResponseEntity< List<Veiculo> > findAll( ) {
 		
-		List<Combustivel> list = service.findAll();
+		List<Veiculo> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value = "/naoAbastecidos")
+	public ResponseEntity< List<Veiculo> > buscarTodosNaoAbastecidos( ) {
+		
+		List<Veiculo> list = service.buscarTodosNaoAbastecidos();
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Combustivel> update( @PathVariable Long id, @Valid @RequestBody Combustivel obj ) {
+	public ResponseEntity<Veiculo> update( @PathVariable Long id, @Valid @RequestBody Veiculo obj ) {
 		
-		Combustivel newObj = service.update(id, obj);
+		Veiculo newObj = service.update(id, obj);
 		return ResponseEntity.ok().body( newObj );
 	}
 	
 	@PatchMapping(value = "/{id}")
-	public ResponseEntity<Combustivel> updatePatch( @PathVariable Long id, @Valid @RequestBody Combustivel obj ) {
+	public ResponseEntity<Veiculo> updatePatch( @PathVariable Long id, @Valid @RequestBody Veiculo obj ) {
 		
-		Combustivel newObj = service.update(id, obj);
+		Veiculo newObj = service.update(id, obj);
 		return ResponseEntity.ok().body( newObj );
 	}
 	
 	@PostMapping
-	public ResponseEntity<Combustivel> create ( @Valid @RequestBody Combustivel obj ) {
+	public ResponseEntity<Veiculo> create ( @Valid @RequestBody Veiculo obj ) {
 		
-		Combustivel newObj = service.create( obj );
+		Veiculo newObj = service.create( obj );
 		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/{id}")
 				  .buildAndExpand( newObj.getId() ).toUri();
 		
@@ -74,4 +80,5 @@ public class CombustivelResource {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+
 }
