@@ -2,11 +2,8 @@ package br.com.postogasolina.gui;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -14,40 +11,32 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import br.com.postogasolina.service.AbastecimentoService;
+import br.com.postogasolina.service.BombaService;
+import br.com.postogasolina.service.VeiculoService;
+
 public class TelaCard extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	private JPanel painelCards;
 	
 	private TelaVeiculo cardVeiculo;
 	private TelaCombustivel cardCombustivel;
 	private TelaBomba cardBomba;
-	
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaCard frame = new TelaCard();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private TelaRelatorio cardRelatorio;
+	private TelaSobre cardSobre;
+	private TelaAbastecer cardAbastecer;
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaCard() {
+	public TelaCard( VeiculoService veiculoService, BombaService bombaService, AbastecimentoService abastecimentoService ) {
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 504, 345);
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -55,6 +44,7 @@ public class TelaCard extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout(0, 0));
 		
+		//Menu 1
 		JMenu menu1 = new JMenu("Cadastrar");
 		
 		JMenuItem menu1Veiculos = new JMenuItem("Veículo");
@@ -81,14 +71,33 @@ public class TelaCard extends JFrame {
 		});
 		menu1.add(menu1Combustivel);
 		
+		//Menu 2
 		JMenu menu2 = new JMenu("Abastecimento");
+		
 		JMenuItem menu2Abastecer = new JMenuItem("Abastecer");
+		menu2Abastecer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mudarCard("Abastecer");
+			}
+		});
 		menu2.add(menu2Abastecer);
+		
 		JMenuItem menu2Relatorio = new JMenuItem("Relatório");
+		menu2Relatorio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mudarCard("Relatório");
+			}
+		});
 		menu2.add(menu2Relatorio);
 		
-		JMenu menu3 = new JMenu("Sobre");
+		//Menu 3
+		JMenu menu3 = new JMenu("Ajuda");
 		JMenuItem menu3Sobre = new JMenuItem("Informação");
+		menu3Sobre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mudarCard("Informação");
+			}
+		});
 		menu3.add(menu3Sobre);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -111,6 +120,14 @@ public class TelaCard extends JFrame {
 		cardBomba = new TelaBomba();
 		painelCards.add( cardBomba, "cardBomba" );
 		
+		cardRelatorio = new TelaRelatorio( abastecimentoService );
+		painelCards.add( cardRelatorio, "cardRelatorio" );
+		
+		cardSobre = new TelaSobre();
+		painelCards.add( cardSobre, "cardSobre" );
+			
+		cardAbastecer = new TelaAbastecer(veiculoService, bombaService, abastecimentoService);
+		painelCards.add( cardAbastecer, "cardAbastecer" );
 		
 		getContentPane().add(painelCards, BorderLayout.CENTER);
 
@@ -133,11 +150,24 @@ public class TelaCard extends JFrame {
 				
 			case "Combustivel":
 				c.show( painelCards, "cardCombustivel");
+				break;
+			
+			case "Abastecer":
+				c.show( painelCards, "cardAbastecer");
+				break;
+				
+			case "Relatório":
+				c.show( painelCards, "cardRelatorio");
 				break;		
+			
+			case "Informação":
+				c.show( painelCards, "cardSobre");
+				break;	
 				
 			default:
 				break;
 		}
 	}
+
 
 }

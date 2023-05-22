@@ -7,8 +7,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import br.com.postogasolina.gui.TelaInicial;
+import br.com.postogasolina.gui.TelaCard;
 import br.com.postogasolina.service.AbastecimentoService;
+import br.com.postogasolina.service.BombaService;
+import br.com.postogasolina.service.VeiculoService;
 import br.com.postogasolina.test.OrdemExecucaoTests;
 
 /**
@@ -25,7 +27,11 @@ public class TestConfig {
 	private OrdemExecucaoTests ordemExecucaoTests;
 	
 	@Autowired
-	private AbastecimentoService abastecimentoervice;
+	private VeiculoService veiculoService;
+	@Autowired
+	private BombaService bombaService;
+	@Autowired
+	private AbastecimentoService abastecimentoService;
 	
 	@Bean
 	public void instanciaBD() {
@@ -39,11 +45,9 @@ public class TestConfig {
 		
 		System.setProperty("java.awt.headless", "false");
 		SwingUtilities.invokeLater(() -> {
-			TelaInicial frame = new TelaInicial();
-			
-			frame.setAbastecimentoService(abastecimentoervice);
-			
-			frame.setDefaultCloseOperation(TelaInicial.EXIT_ON_CLOSE);
+	
+			TelaCard frame = new TelaCard(veiculoService, bombaService, abastecimentoService);
+			frame.setDefaultCloseOperation(TelaCard.EXIT_ON_CLOSE);
 			frame.setVisible(true);
 		});
 
