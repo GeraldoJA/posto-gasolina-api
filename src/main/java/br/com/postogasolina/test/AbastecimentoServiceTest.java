@@ -57,8 +57,8 @@ public class AbastecimentoServiceTest {
 			else if(random > 0.5 && random < 1.0)
 				this.abastecimentoService.create(b2, veiculo, Double.valueOf( veiculo.getCapacidadeTanque() ));
 			else {
-				this.abastecimentoService.create(b1, veiculo, Double.valueOf( veiculo.getCapacidadeTanque() -5) );
-				this.abastecimentoService.create(b2, veiculo, Double.valueOf( veiculo.getCapacidadeTanque() +5) );
+				this.abastecimentoService.create(b1, veiculo, Double.valueOf( veiculo.getCapacidadeTanque() / 2) );
+				this.abastecimentoService.create(b2, veiculo, Double.valueOf( veiculo.getCapacidadeTanque() / 2) );
 			}
 		}
 			

@@ -1,5 +1,6 @@
 package br.com.postogasolina.service;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -134,23 +135,23 @@ public class AbastecimentoService {
 		for (Abastecimento a : listA) {	
 			
 			if(a.getBomba().getCombustivel().getTipoCombustivel() == TipoCombustivel.ALCOOL ){
-				totalLitrosEtanal += a.getValor();
-				totalVendidoEtanal += a.getQuantidadeLitros();
+				totalLitrosEtanal += a.getQuantidadeLitros();
+				totalVendidoEtanal += a.getValor();
 				totalTempoAbastecendoEtanol =+ a.getQuantidadeLitros() / a.getBomba().getVelocidadeAbastecimento(); 
 			}else if(a.getBomba().getCombustivel().getTipoCombustivel() == TipoCombustivel.GASOLINA_COMUM ) {
-				totalLitrosGasolina += a.getValor();
-				totalVendidoGasolina += a.getQuantidadeLitros();
+				totalLitrosGasolina += a.getQuantidadeLitros();
+				totalVendidoGasolina += a.getValor();
 				totalTempoAbastecendoGasolina =+ a.getQuantidadeLitros() / a.getBomba().getVelocidadeAbastecimento();
 			}
 		}
 		
-		params.put( "totalLitrosEtanal", "Total de litros de ETANOL abasteido = " + totalLitrosEtanal);
-		params.put( "totalVendidoEtanal", "Total de vendido de ETANOL = " + totalVendidoEtanal);
-		params.put( "totalTempoAbastecendoEtanol", "Total de duranção abastecendo ETANOL = " + totalTempoAbastecendoEtanol);
+		params.put( "totalLitrosEtanal", "Total de litros de ETANOL abasteido = " + new DecimalFormat(".##").format(totalLitrosEtanal) );
+		params.put( "totalVendidoEtanal", "Total de vendido de ETANOL = " + new DecimalFormat(".##").format(totalVendidoEtanal) );
+		params.put( "totalTempoAbastecendoEtanol", "Total de duranção abastecendo ETANOL = " + new DecimalFormat(".##").format(totalTempoAbastecendoEtanol)  + " minutos");
 		
-		params.put( "totalLitrosGasolina", "Total de litros de GASOLINA abasteido = " + totalLitrosGasolina);
-		params.put( "totalVendidoGasolina", "Total de vendido de GASOLINA = " + totalVendidoGasolina);
-		params.put( "totalTempoAbastecendoGasolina", "Total de duranção abastecendo GASOLINA = " + totalTempoAbastecendoGasolina);		
+		params.put( "totalLitrosGasolina", "Total de litros de GASOLINA abasteido = " + new DecimalFormat(".##").format(totalLitrosGasolina) );
+		params.put( "totalVendidoGasolina", "Total de vendido de GASOLINA = " + new DecimalFormat(".##").format(totalVendidoGasolina) );
+		params.put( "totalTempoAbastecendoGasolina", "Total de duranção abastecendo GASOLINA = " + new DecimalFormat(".##").format(totalTempoAbastecendoGasolina)  + " minutos");		
 
 		return params;
 	}
@@ -167,14 +168,14 @@ public class AbastecimentoService {
 			String placa = a.getVeiculo().getPlaca();
 			String infoCarro = a.getVeiculo().getModelo() + " " + a.getVeiculo().getNome() + ", placa " + placa;
 			String descricao = " Abasteceu " + a.getQuantidadeLitros() + " de litros de " + a.getBomba().getCombustivel().getTipoCombustivel();
-
+		
 			AbastecimentoDTO dto = new AbastecimentoDTO();
 			dto.setData(data);
 			dto.setInfoCarro(infoCarro);
 			dto.setPlaca(placa);
 			dto.setDescricao(descricao);
 			dto.setValorGasto( a.getValor() );
-			
+				
 			if(a.getBomba().getCombustivel().getTipoCombustivel() == TipoCombustivel.ALCOOL ){
 				dto.setQtdAlcool(a.getQuantidadeLitros());
 				dto.setQtdGasolina( 0.0 );
@@ -182,7 +183,7 @@ public class AbastecimentoService {
 				dto.setQtdAlcool( 0.0 );
 				dto.setQtdGasolina(a.getQuantidadeLitros());
 			}
-			
+
 			listaAbastecimentoDTO.add(dto);
 		}
 		

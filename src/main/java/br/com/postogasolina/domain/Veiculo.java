@@ -161,6 +161,11 @@ public class Veiculo implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return modelo + " " + nome + ", placa: " + placa;
+	}
+
 
 
 
