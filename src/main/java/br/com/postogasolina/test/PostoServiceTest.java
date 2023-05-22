@@ -28,7 +28,7 @@ public class PostoServiceTest {
 	
 	private void testaCreatePosto() {
 		
-		Posto p1 = new Posto( null, "posto Logus" );
+		Posto p1 = new Posto( null, "Posto Logus" );
 		this.postoService.create(p1);
 		
 		System.out.println("testa Create Posto");
