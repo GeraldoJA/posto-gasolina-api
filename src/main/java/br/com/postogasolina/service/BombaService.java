@@ -35,7 +35,7 @@ public class BombaService {
 	public Bomba findById( Long id )  {	
 		Optional<Bomba> obj = repository.findById(id);	
 		return obj.orElseThrow( () -> new ObjectNotFoundException(
-				"Objeto não encontrato! Id: " + id + ", Tipo: " + Bomba.class.getName()) );
+				"Objeto nï¿½o encontrato! Id: " + id + ", Tipo: " + Bomba.class.getName()) );
 	}
 	
 	/**
@@ -84,7 +84,7 @@ public class BombaService {
 			repository.deleteById(id);
 		} catch ( DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException
-			( "Posto não pode ser deletado! Possue Abastecimentos associados." );
+			( "Posto nÃ£o pode ser deletado! Possue Abastecimentos associados." );
 		}
 	}
 

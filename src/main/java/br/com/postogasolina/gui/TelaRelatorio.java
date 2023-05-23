@@ -30,14 +30,14 @@ public class TelaRelatorio extends JPanel {
 		
 		this.abastecimentoService = abastecimentoService;
 		
-		JButton btnRelatorio = new JButton("Gerar Relatório");
+		JButton btnRelatorio = new JButton("Gerar RelatÃ³rio");
 		btnRelatorio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gerarRelatorio();
 			}
 		});
 		
-		JLabel lblNewLabel = new JLabel("RELATÓRIO");
+		JLabel lblNewLabel = new JLabel("RELATÃ“RIO");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		

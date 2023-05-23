@@ -32,7 +32,7 @@ public class VeiculoService {
 	public Veiculo findById( Long id )  {	
 		Optional<Veiculo> obj = repository.findById(id);	
 		return obj.orElseThrow( () -> new ObjectNotFoundException(
-				"Objeto não encontrato! Id: " + id + ", Tipo: " + Veiculo.class.getName()) );
+				"Objeto nÃ£o encontrato! Id: " + id + ", Tipo: " + Veiculo.class.getName()) );
 	}
 	
 	/**
@@ -45,7 +45,7 @@ public class VeiculoService {
 	}
 	
 	/**
-	 * Busca todos os veiculos ainda não abastecidos
+	 * Busca todos os veiculos ainda nï¿½o abastecidos
 	 * 
 	 * @return List<Veiculo> 
 	 */
@@ -93,7 +93,7 @@ public class VeiculoService {
 			repository.deleteById(id);
 		} catch ( DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException
-			( "Posto não pode ser deletado! Possue Bombas associadas." );
+			( "Posto nÃ£o pode ser deletado! Possue Bombas associadas." );
 		}
 	}
 

@@ -18,7 +18,7 @@ class CombustivelServiceTest {
 	private CombustivelService service;
 	
 	@Test
-	@DisplayName("Deve criar um combustível.")
+	@DisplayName("Deve criar um combustï¿½vel.")
 	public void deveCriarUmCombustivel() {
 		
 		Combustivel obj = new Combustivel(null, TipoCombustivel.GASOLINA_COMUM);
@@ -28,7 +28,7 @@ class CombustivelServiceTest {
 	}
 	
 	@Test
-	@DisplayName("Deve buscar todos os combustíveis.")
+	@DisplayName("Deve buscar todos os combustÃ­veis.")
 	private void deveBuscarTodosOsCombustiveis() {
 		
 		List<Combustivel> list = this.service.findAll();

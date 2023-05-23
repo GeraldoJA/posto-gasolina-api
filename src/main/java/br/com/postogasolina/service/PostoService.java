@@ -33,7 +33,7 @@ public class PostoService {
 	public Posto findById( Long id )  {	
 		Optional<Posto> obj = repository.findById(id);	
 		return obj.orElseThrow( () -> new ObjectNotFoundException(
-				"Objeto n„o encontrato! Id: " + id + ", Tipo: " + Posto.class.getName()) );
+				"Objeto n√£o encontrato! Id: " + id + ", Tipo: " + Posto.class.getName()) );
 	}
 	
 	/**
@@ -82,7 +82,7 @@ public class PostoService {
 			repository.deleteById(id);
 		} catch ( DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException
-			( "Posto n„o pode ser deletado! Possue Abastecimentos associados." );
+			( "Posto n√£o pode ser deletado! Possue Abastecimentos associados." );
 		}
 	}
 

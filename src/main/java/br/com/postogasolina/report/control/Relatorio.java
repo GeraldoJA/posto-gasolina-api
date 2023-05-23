@@ -19,13 +19,13 @@ public class Relatorio {
 		
 		InputStream fonte = Relatorio.class.getResourceAsStream("/br/com/postogasolina/report/ireport/relatorio.jrxml");  //carregar o arquivo
 		
-		JasperReport report = JasperCompileManager.compileReport(fonte);  //compila o JasperReport e trata a exceção JRException
+		JasperReport report = JasperCompileManager.compileReport(fonte);  //compila o JasperReport e trata a exceptions
 		
 		JasperPrint print = JasperFillManager.fillReport
-				(report, params, new JRBeanCollectionDataSource(lista) );   //2º parametro tipo como se fosse passar uma imagem, exemplo de uma logo, 
+				(report, params, new JRBeanCollectionDataSource(lista) );   //2Âº parametro tipo como se fosse passar uma imagem, exemplo de uma logo, 
 				                                                          //seria uma referencia HashMap (chave e valor), passa o nome e o caminho da imagem 
-																	      //3º parametro transforma a lita em um datasource
+																	      //3Âº parametro transforma a lita em um datasource
 		
-		JasperViewer.viewReport(print, false);     //método para exibição. o false é para que a aplicação continuar ligada se fechar o reltório
+		JasperViewer.viewReport(print, false);     //2Âº parametro false serve a aplicaÃ§Ã£o continuar ligada se fechar o relatÃ³rio
 	}
 }

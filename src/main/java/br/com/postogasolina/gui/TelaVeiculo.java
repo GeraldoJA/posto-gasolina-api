@@ -40,7 +40,7 @@ public class TelaVeiculo extends JPanel {
 		
 		this.veiculoService = veiculoService;
 			
-		JLabel lblTitulo = new JLabel("VEÕCULOS");
+		JLabel lblTitulo = new JLabel("VE√çCULOS");
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JLabel lblNewLabel = new JLabel("Modelo: ");
@@ -65,7 +65,7 @@ public class TelaVeiculo extends JPanel {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				if( !filtrar(e) )
-					e.consume();   //consume n„o faz nada
+					e.consume();   //consume nÔøΩo faz nada
 			}
 		});
 		tfCapacidade.setColumns(10);
@@ -175,7 +175,7 @@ public class TelaVeiculo extends JPanel {
 		else if( veiculo.getPlaca().length() < 1 || veiculo.getPlaca().length() > 20 )
 			JOptionPane.showMessageDialog(null, "Placa precisa ter entre 1 e 20 caracteres", "ERRO", JOptionPane.WARNING_MESSAGE);
 		else if( veiculo.getCapacidadeTanque() <= 0 )
-			JOptionPane.showMessageDialog(null, "Informe uma quantidade v·lida", "ERRO", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Informe uma quantidade vÔøΩlida", "ERRO", JOptionPane.WARNING_MESSAGE);
 		else {
 			veiculoService.create(veiculo);
 			String mensagem = veiculo.toString() +  " cadastrado com Sucesso!";

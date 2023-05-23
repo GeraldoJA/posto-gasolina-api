@@ -12,7 +12,7 @@ import br.com.postogasolina.repositories.CombustivelRepository;
 import br.com.postogasolina.service.exception.ObjectNotFoundException;
 
 /**
- * Classe de acesso aos serviÁoss referente ‡ entidade CombustÌvel.
+ * Classe de acesso aos servi√ßos referente √† entidade Combust√≠vel.
  * 
  * @author Geraldo jorge - candidato5
  * 		   email: geraldo.gja@gmail.com
@@ -32,7 +32,7 @@ public class CombustivelService {
 	public Combustivel findById( Long id )  {	
 		Optional<Combustivel> obj = repository.findById(id);	
 		return obj.orElseThrow( () -> new ObjectNotFoundException(
-				"Objeto n„o encontrato! Id: " + id + ", Tipo: " + Combustivel.class.getName()) );
+				"Objeto n√£o encontrato! Id: " + id + ", Tipo: " + Combustivel.class.getName()) );
 	}
 	
 	/**
@@ -55,7 +55,7 @@ public class CombustivelService {
 	}
 	
 	/**
-	 * Atualiza um combustÌvel
+	 * Atualiza um combust√≠vel
 	 * 
 	 * @param id - Long
 	 * @param obj - Combustivel
@@ -77,7 +77,7 @@ public class CombustivelService {
 			repository.deleteById(id);
 		} catch ( DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException
-			( "Posto n„o pode ser deletado! Possue Bombas associadas." );
+			( "Posto n√£o pode ser deletado! Possue Bombas associadas." );
 		}
 	}
 

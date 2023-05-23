@@ -54,7 +54,7 @@ public class AbastecimentoService {
 	public Abastecimento findById( Long id )  {	
 		Optional<Abastecimento> obj = repository.findById(id);	
 		return obj.orElseThrow( () -> new ObjectNotFoundException(
-				"Objeto não encontrato! Id: " + id + ", Tipo: " + Abastecimento.class.getName()) );
+				"Objeto nÃ£o encontrato! Id: " + id + ", Tipo: " + Abastecimento.class.getName()) );
 	}
 	
 	/**
@@ -106,12 +106,12 @@ public class AbastecimentoService {
 			repository.deleteById(id);
 		} catch ( DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException
-			( "Posto não pode ser deletado! Possue Abastecimentos associados." );
+			( "Posto nÃ£o pode ser deletado! Possue Abastecimentos associados." );
 		}
 	}
 	
 	/**
-	 * Variáveis para imprimir os valores totais no Resumo
+	 * Variï¿½veis para imprimir os valores totais no Resumo
 	 */
 	private void carregarVariaveisResumo() {
 		
@@ -147,8 +147,8 @@ public class AbastecimentoService {
 	}
 	
 	/**
-	 * Método carrega lista de Strings que podem ser iteradas
-	 * imprimindo relatório individual de cada abastecimento assim como o resumo total
+	 * MÃ©todo carrega lista de Strings que podem ser iteradas
+	 * imprimindo relatÃ³rio individual de cada abastecimento assim como o resumo total
 	 * 
 	 * @return list - List<String>
 	 */
@@ -165,10 +165,10 @@ public class AbastecimentoService {
 			String data = "Data: " + formatter.format(a.getDate());
 			String infoCarro = a.getVeiculo().getModelo() + " " + a.getVeiculo().getNome() + ", placa " +  a.getVeiculo().getPlaca();
 			String infoConbustivel = " foi abastecido com " + a.getQuantidadeLitros() + " de " + a.getBomba().getCombustivel().getTipoCombustivel();
-			list.add(data + " - Veículo: " + infoCarro + infoConbustivel);		
+			list.add(data + " - Veï¿½culo: " + infoCarro + infoConbustivel);		
 		}
 		
-		list.add("\n ##### RESUMO DA SIMULAÇÃO ##### \n ");
+		list.add("\n ##### RESUMO DA SIMULAï¿½ï¿½O ##### \n ");
 		list.add("Total de litros de ETANOL abasteido = " + totalLitrosEtanal);
 		list.add("Total de vendido de ETANOL = " + totalVendidoEtanal);
 		list.add("Tempoo abastecendo ETANOL = " + totalTempoAbastecendoEtanol);
@@ -177,9 +177,9 @@ public class AbastecimentoService {
 		list.add("Total de vendido de GASOLINA = " + totalVendidoGasolina);
 		list.add("Tempo abastecendo GASOLINA = " + totalTempoAbastecendoGasolina);		
 		
-		list.add("Total de litros de OUTROS COMBUSTÍVEIS abasteido = " + totalLitrosOutros);
-		list.add("Total de vendido de OUTROS COMBUSTÍVEIS = " + totalVendidoOutros);
-		list.add("Tempo abastecendo OUTROS COMBUSTÍVEIS = " + totalTempoAbastecendoOutros);	
+		list.add("Total de litros de OUTROS COMBUSTï¿½VEIS abasteido = " + totalLitrosOutros);
+		list.add("Total de vendido de OUTROS COMBUSTï¿½VEIS = " + totalVendidoOutros);
+		list.add("Tempo abastecendo OUTROS COMBUSTï¿½VEIS = " + totalTempoAbastecendoOutros);	
 
 		return list;
 	}
@@ -187,7 +187,7 @@ public class AbastecimentoService {
 	
 	/**
 	 * Armazena os valores totais de cada tipo em uma respectiva key 
-	 * do HashMap. Usado no relatório do JasperReport.
+	 * do HashMap. Usado no relatÃ³rio do JasperReport.
 	 * 
 	 * @return HashMap<String,Object>
 	 */
@@ -212,18 +212,18 @@ public class AbastecimentoService {
 				"Tempo abastecendo GASOLINA: " + new DecimalFormat(".##").format(totalTempoAbastecendoGasolina)  + " minutos");		
 		
 		params.put( "totalLitrosOutros", 
-				"Litros de OUTROS COMBUSTÍVEIS: " + new DecimalFormat(".##").format(totalLitrosOutros) );
+				"Litros de OUTROS COMBUSTï¿½VEIS: " + new DecimalFormat(".##").format(totalLitrosOutros) );
 		params.put( "totalVendidoOutros", 
-				"Faturamento de OUTROS COMBUSTÍVEIS: " + new DecimalFormat(".##").format(totalVendidoOutros) );
+				"Faturamento de OUTROS COMBUSTï¿½VEIS: " + new DecimalFormat(".##").format(totalVendidoOutros) );
 		params.put( "totalTempoAbastecendoOutros", 
-				"Tempo abastecendo OUTROS COMBUSTÍVEIS: " + new DecimalFormat(".##").format(totalTempoAbastecendoOutros)  + " minutos");	
+				"Tempo abastecendo OUTROS COMBUSTï¿½VEIS: " + new DecimalFormat(".##").format(totalTempoAbastecendoOutros)  + " minutos");	
 
 		return params;
 	}
 	
 	/**
 	 * Cria uma lista de classes AbastecimentoDTO
-	 * AbastecimentoDTO é modelada para facilitar a impressão dos dados no relatório.
+	 * AbastecimentoDTO Ã© modelada para facilitar a impressÃ£o dos dados no relatÃ³rio.
 	 * 
 	 * @return listaAbastecimentoDTO - List<AbastecimentoDTO>
 	 */

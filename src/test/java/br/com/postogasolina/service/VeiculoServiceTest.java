@@ -28,7 +28,7 @@ class VeiculoServiceTest {
 	}
 	
 	@Test
-	@DisplayName("Deve buscar todos os veículos.")
+	@DisplayName("Deve buscar todos os veÃ­culos.")
 	private void deveBuscarTodosOsVeiculos() {
 		
 		List<Veiculo> list = this.service.findAll();
