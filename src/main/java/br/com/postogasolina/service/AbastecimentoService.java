@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import br.com.postogasolina.domain.Abastecimento;
@@ -30,7 +31,19 @@ import br.com.postogasolina.service.exception.ObjectNotFoundException;
 public class AbastecimentoService {
 	
 	@Autowired
-	private AbastecimentoRepository abastecimentoRepository;
+	private AbastecimentoRepository repository;
+	
+	private Double totalLitrosEtanal;
+	private Double totalVendidoEtanal;
+	private Double totalTempoAbastecendoEtanol;
+	
+	private Double totalLitrosGasolina;
+	private Double totalVendidoGasolina;
+	private Double totalTempoAbastecendoGasolina;
+	
+	private Double totalLitrosOutros;
+	private Double totalVendidoOutros;
+	private Double totalTempoAbastecendoOutros;
 	
 	/**
 	 * Busca uma Abastecimento por Id
@@ -39,7 +52,7 @@ public class AbastecimentoService {
 	 * @return Abastecimento
 	 */
 	public Abastecimento findById( Long id )  {	
-		Optional<Abastecimento> obj = abastecimentoRepository.findById(id);	
+		Optional<Abastecimento> obj = repository.findById(id);	
 		return obj.orElseThrow( () -> new ObjectNotFoundException(
 				"Objeto não encontrato! Id: " + id + ", Tipo: " + Abastecimento.class.getName()) );
 	}
@@ -50,7 +63,7 @@ public class AbastecimentoService {
 	 * @return List<Abastecimento> 
 	 */
 	public List<Abastecimento> findAll() {
-		return abastecimentoRepository.findAll();
+		return repository.findAll();
 	}
 	
 	/**
@@ -68,49 +81,91 @@ public class AbastecimentoService {
 		abastecimento.setQuantidadeLitros(qtdLitros);
 		abastecimento.setValor(qtdLitros * bomba.getPreco());
 		
-		return this.abastecimentoRepository.save(abastecimento);
+		return this.repository.save(abastecimento);
 	}
 	
+	/**
+	 * Atualiza um Abastecimento
+	 * 
+	 * @param obj - Abastecimento
+	 * @return Abastecimento
+	 */
+	public Abastecimento update( Abastecimento obj) {
+		Abastecimento newObj = findById(obj.getId());
+		return repository.save(newObj);
+	}
 	
-	public List<String> relatorioCompletoAbastecimento() {
-			
-		Double totalLitrosEtanal = 0.0;
-		Double totalVendidoEtanal = 0.0;
-		Double totalTempoAbastecendoEtanol = 0.0;
+	/**
+	 * Deleta um Posto
+	 * 
+	 * @param id
+	 */
+	public void delete( Long id ) {
+		findById(id);
+		try {
+			repository.deleteById(id);
+		} catch ( DataIntegrityViolationException e) {
+			throw new DataIntegrityViolationException
+			( "Posto não pode ser deletado! Possue Abastecimentos associados." );
+		}
+	}
+	
+	/**
+	 * Variáveis para imprimir os valores totais no Resumo
+	 */
+	private void carregarVariaveisResumo() {
 		
-		Double totalLitrosGasolina = 0.0;
-		Double totalVendidoGasolina = 0.0;
-		Double totalTempoAbastecendoGasolina = 0.0;
-			
-		Double totalLitrosOutros = 0.0;
-		Double totalVendidoOutros = 0.0;
-		Double totalTempoAbastecendoOutros = 0.0;
+		totalLitrosEtanal = 0.0;
+		totalVendidoEtanal = 0.0;
+		totalTempoAbastecendoEtanol = 0.0;
 		
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy-hh:mm");	
-		List<String> list = new ArrayList<String>();
-		list.add("\n ##### ABASTECIMETNOS ##### \n");
-				
+		totalLitrosGasolina = 0.0;
+		totalVendidoGasolina = 0.0;
+		totalTempoAbastecendoGasolina = 0.0;
+			
+		totalLitrosOutros = 0.0;
+		totalVendidoOutros = 0.0;
+		totalTempoAbastecendoOutros = 0.0;
+		
 		List<Abastecimento> listA = findAll();
 		for (Abastecimento a : listA) {	
-			
-			String data = "Data: " + formatter.format(a.getDate());
-			String infoCarro = a.getVeiculo().getModelo() + " " + a.getVeiculo().getNome() + ", placa " +  a.getVeiculo().getPlaca();
-			String infoConbustivel = " foi abastecido com " + a.getQuantidadeLitros() + " de " + a.getBomba().getCombustivel().getTipoCombustivel();
-			list.add(data + " - Veículo: " + infoCarro + infoConbustivel);
-			
+		
 			if(a.getBomba().getCombustivel().getTipoCombustivel() == TipoCombustivel.ALCOOL ){
-				totalLitrosEtanal += a.getValor();
-				totalVendidoEtanal += a.getQuantidadeLitros();
+				totalLitrosEtanal += a.getQuantidadeLitros();
+				totalVendidoEtanal += a.getValor();
 				totalTempoAbastecendoEtanol =+ a.getQuantidadeLitros() / a.getBomba().getVelocidadeAbastecimento(); 
 			}else if(a.getBomba().getCombustivel().getTipoCombustivel() == TipoCombustivel.GASOLINA_COMUM ) {
-				totalLitrosGasolina += a.getValor();
-				totalVendidoGasolina += a.getQuantidadeLitros();
+				totalLitrosGasolina += a.getQuantidadeLitros();
+				totalVendidoGasolina += a.getValor();
 				totalTempoAbastecendoGasolina =+ a.getQuantidadeLitros() / a.getBomba().getVelocidadeAbastecimento();
 			}else {
 				totalLitrosOutros += a.getQuantidadeLitros();
 				totalVendidoOutros += a.getValor();
 				totalTempoAbastecendoOutros += a.getQuantidadeLitros() / a.getBomba().getVelocidadeAbastecimento();
 			}
+		}
+	}
+	
+	/**
+	 * Método carrega lista de Strings que podem ser iteradas
+	 * imprimindo relatório individual de cada abastecimento assim como o resumo total
+	 * 
+	 * @return list - List<String>
+	 */
+	public List<String> relatorioCompletoAbastecimento() {
+			
+		carregarVariaveisResumo();
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy-hh:mm");	
+		List<String> list = new ArrayList<String>();
+		list.add("\n ##### ABASTECIMETNOS ##### \n");
+				
+		List<Abastecimento> listA = findAll();
+		for (Abastecimento a : listA) {		
+			String data = "Data: " + formatter.format(a.getDate());
+			String infoCarro = a.getVeiculo().getModelo() + " " + a.getVeiculo().getNome() + ", placa " +  a.getVeiculo().getPlaca();
+			String infoConbustivel = " foi abastecido com " + a.getQuantidadeLitros() + " de " + a.getBomba().getCombustivel().getTipoCombustivel();
+			list.add(data + " - Veículo: " + infoCarro + infoConbustivel);		
 		}
 		
 		list.add("\n ##### RESUMO DA SIMULAÇÃO ##### \n ");
@@ -130,65 +185,48 @@ public class AbastecimentoService {
 	}
 	
 	
-	
+	/**
+	 * Armazena os valores totais de cada tipo em uma respectiva key 
+	 * do HashMap. Usado no relatório do JasperReport.
+	 * 
+	 * @return HashMap<String,Object>
+	 */
 	public HashMap<String,Object> resumoAbastecimento() {
 		
-		Double totalLitrosEtanal = 0.0;
-		Double totalVendidoEtanal = 0.0;
-		Double totalTempoAbastecendoEtanol = 0.0;
-		
-		Double totalLitrosGasolina = 0.0;
-		Double totalVendidoGasolina = 0.0;
-		Double totalTempoAbastecendoGasolina = 0.0;
-		
-		Double totalLitrosOutros = 0.0;
-		Double totalVendidoOutros = 0.0;
-		Double totalTempoAbastecendoOutros = 0.0;
+		carregarVariaveisResumo();
 			
-		HashMap<String,Object> params = new HashMap<String,Object>();	
-						
-		List<Abastecimento> listA = findAll();
-		for (Abastecimento a : listA) {	
-			
-			if(a.getBomba().getCombustivel().getTipoCombustivel() == TipoCombustivel.ALCOOL ){
-				totalLitrosEtanal += a.getQuantidadeLitros();
-				totalVendidoEtanal += a.getValor();
-				totalTempoAbastecendoEtanol =+ a.getQuantidadeLitros() / a.getBomba().getVelocidadeAbastecimento(); 
-			}else if(a.getBomba().getCombustivel().getTipoCombustivel() == TipoCombustivel.GASOLINA_COMUM ) {
-				totalLitrosGasolina += a.getQuantidadeLitros();
-				totalVendidoGasolina += a.getValor();
-				totalTempoAbastecendoGasolina =+ a.getQuantidadeLitros() / a.getBomba().getVelocidadeAbastecimento();
-			}else {
-				totalLitrosOutros += a.getQuantidadeLitros();
-				totalVendidoOutros += a.getValor();
-				totalTempoAbastecendoOutros += a.getQuantidadeLitros() / a.getBomba().getVelocidadeAbastecimento();
-			}
-		}
-		
+		HashMap<String,Object> params = new HashMap<String,Object>();						
+	
 		params.put( "totalLitrosEtanal", 
-				"Total de litros de ETANOL abasteido = " + new DecimalFormat(".##").format(totalLitrosEtanal) );
+				"Litros de ETANOL: " + new DecimalFormat(".##").format(totalLitrosEtanal) );
 		params.put( "totalVendidoEtanal", 
-				"Total de vendido de ETANOL = " + new DecimalFormat(".##").format(totalVendidoEtanal) );
+				"Faturamento de ETANOL: " + new DecimalFormat(".##").format(totalVendidoEtanal) );
 		params.put( "totalTempoAbastecendoEtanol", 
-				"Tempo abastecendo ETANOL = " + new DecimalFormat(".##").format(totalTempoAbastecendoEtanol)  + " minutos");
+				"Tempo abastecendo ETANOL: " + new DecimalFormat(".##").format(totalTempoAbastecendoEtanol)  + " minutos");
 		
 		params.put( "totalLitrosGasolina", 
-				"Total de litros de GASOLINA abasteido = " + new DecimalFormat(".##").format(totalLitrosGasolina) );
+				"Litros de GASOLINA: " + new DecimalFormat(".##").format(totalLitrosGasolina) );
 		params.put( "totalVendidoGasolina", 
-				"Total de vendido de GASOLINA = " + new DecimalFormat(".##").format(totalVendidoGasolina) );
+				"Faturamento de GASOLINA: " + new DecimalFormat(".##").format(totalVendidoGasolina) );
 		params.put( "totalTempoAbastecendoGasolina", 
-				"Tempo abastecendo GASOLINA = " + new DecimalFormat(".##").format(totalTempoAbastecendoGasolina)  + " minutos");		
+				"Tempo abastecendo GASOLINA: " + new DecimalFormat(".##").format(totalTempoAbastecendoGasolina)  + " minutos");		
 		
 		params.put( "totalLitrosOutros", 
-				"Total de litros de OUTROS COMBUSTÍVEIS abasteido = " + new DecimalFormat(".##").format(totalLitrosOutros) );
+				"Litros de OUTROS COMBUSTÍVEIS: " + new DecimalFormat(".##").format(totalLitrosOutros) );
 		params.put( "totalVendidoOutros", 
-				"Total de vendido de OUTROS COMBUSTÍVEIS = " + new DecimalFormat(".##").format(totalVendidoOutros) );
+				"Faturamento de OUTROS COMBUSTÍVEIS: " + new DecimalFormat(".##").format(totalVendidoOutros) );
 		params.put( "totalTempoAbastecendoOutros", 
-				"Tempo abastecendo OUTROS COMBUSTÍVEIS = " + new DecimalFormat(".##").format(totalTempoAbastecendoOutros)  + " minutos");	
+				"Tempo abastecendo OUTROS COMBUSTÍVEIS: " + new DecimalFormat(".##").format(totalTempoAbastecendoOutros)  + " minutos");	
 
 		return params;
 	}
 	
+	/**
+	 * Cria uma lista de classes AbastecimentoDTO
+	 * AbastecimentoDTO é modelada para facilitar a impressão dos dados no relatório.
+	 * 
+	 * @return listaAbastecimentoDTO - List<AbastecimentoDTO>
+	 */
 	public List<AbastecimentoDTO> prepararAbastecimentoDTO() {
 
 		List<AbastecimentoDTO> listaAbastecimentoDTO = new ArrayList<AbastecimentoDTO>();

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import br.com.postogasolina.domain.Veiculo;
@@ -20,7 +21,7 @@ import br.com.postogasolina.service.exception.ObjectNotFoundException;
 public class VeiculoService {
 	
 	@Autowired
-	private VeiculoRepository veiculoRepository;
+	private VeiculoRepository repository;
 	
 	/**
 	 * Busca um Veiculo por Id
@@ -29,7 +30,7 @@ public class VeiculoService {
 	 * @return Veiculo
 	 */
 	public Veiculo findById( Long id )  {	
-		Optional<Veiculo> obj = veiculoRepository.findById(id);	
+		Optional<Veiculo> obj = repository.findById(id);	
 		return obj.orElseThrow( () -> new ObjectNotFoundException(
 				"Objeto não encontrato! Id: " + id + ", Tipo: " + Veiculo.class.getName()) );
 	}
@@ -40,7 +41,7 @@ public class VeiculoService {
 	 * @return List<Veiculo> 
 	 */
 	public List<Veiculo> findAll() {
-		return veiculoRepository.findAll();
+		return repository.findAll();
 	}
 	
 	/**
@@ -49,7 +50,7 @@ public class VeiculoService {
 	 * @return List<Veiculo> 
 	 */
 	public List<Veiculo> buscarTodosNaoAbastecidos() {
-		return veiculoRepository.buscarTodosNaoAbastecidos();
+		return repository.buscarTodosNaoAbastecidos();
 	}
 	
 	/**
@@ -59,7 +60,7 @@ public class VeiculoService {
 	 * @return Veiculo
 	 */
 	public Veiculo create( Veiculo veiculo ) {
-		return this.veiculoRepository.save(veiculo);
+		return this.repository.save(veiculo);
 	}
 	
 	/**
@@ -78,17 +79,22 @@ public class VeiculoService {
 		obj.setCapacidadeTanque( veiculo.getCapacidadeTanque() );
 		obj.setQtdCombustivel( veiculo.getQtdCombustivel() );
 		
-		return veiculoRepository.save(obj);
+		return repository.save(obj);
 	}
 	
 	/**
-	 * Deleta um veiculo
+	 * Deleta um Posto
 	 * 
 	 * @param id
 	 */
 	public void delete( Long id ) {
-		findById(id);	
-		veiculoRepository.deleteById(id);		
+		findById(id);
+		try {
+			repository.deleteById(id);
+		} catch ( DataIntegrityViolationException e) {
+			throw new DataIntegrityViolationException
+			( "Posto não pode ser deletado! Possue Bombas associadas." );
+		}
 	}
 
 }

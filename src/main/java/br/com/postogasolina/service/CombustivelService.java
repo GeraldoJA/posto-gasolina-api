@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import br.com.postogasolina.domain.Combustivel;
@@ -66,12 +67,18 @@ public class CombustivelService {
 	}
 	
 	/**
-	 * Deleta um combustível
-	 * @param id - Long
+	 * Deleta um Posto
+	 * 
+	 * @param id
 	 */
-	public void delete(Long id) {
-		Combustivel obj = findById(id);
-		repository.delete(obj);
+	public void delete( Long id ) {
+		findById(id);
+		try {
+			repository.deleteById(id);
+		} catch ( DataIntegrityViolationException e) {
+			throw new DataIntegrityViolationException
+			( "Posto não pode ser deletado! Possue Bombas associadas." );
+		}
 	}
 
 }

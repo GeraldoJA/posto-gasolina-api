@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import br.com.postogasolina.domain.Bomba;
@@ -23,7 +24,7 @@ import br.com.postogasolina.service.exception.ObjectNotFoundException;
 public class BombaService {
 
 	@Autowired
-	private BombaRepository bombaRepository;
+	private BombaRepository repository;
 	
 	/**
 	 * Busca uma Bomba por Id
@@ -32,7 +33,7 @@ public class BombaService {
 	 * @return Bomba
 	 */
 	public Bomba findById( Long id )  {	
-		Optional<Bomba> obj = bombaRepository.findById(id);	
+		Optional<Bomba> obj = repository.findById(id);	
 		return obj.orElseThrow( () -> new ObjectNotFoundException(
 				"Objeto não encontrato! Id: " + id + ", Tipo: " + Bomba.class.getName()) );
 	}
@@ -43,7 +44,7 @@ public class BombaService {
 	 * @return List<Bomba> 
 	 */
 	public List<Bomba> findAll() {
-		return bombaRepository.findAll();
+		return repository.findAll();
 	}
 	
 	/**
@@ -57,6 +58,34 @@ public class BombaService {
 	public Bomba create( Bomba bomba, Combustivel conbustivel, Posto posto  ) {
 		bomba.setCombustivel(conbustivel);
 		bomba.setPosto(posto);
-		return this.bombaRepository.save(bomba);
+		return this.repository.save(bomba);
 	}
+	
+	/**
+	 * Atualiza uma Bomba
+	 * 
+	 * @param id - Long
+	 * @param obj - Bomba
+	 * @return Bomba
+	 */
+	public Bomba update( Bomba obj ) {
+		Bomba newObj = findById(obj.getId());
+		return repository.save(newObj);
+	}
+	
+	/**
+	 * Deleta um Posto
+	 * 
+	 * @param id
+	 */
+	public void delete( Long id ) {
+		findById(id);
+		try {
+			repository.deleteById(id);
+		} catch ( DataIntegrityViolationException e) {
+			throw new DataIntegrityViolationException
+			( "Posto não pode ser deletado! Possue Abastecimentos associados." );
+		}
+	}
+
 }
