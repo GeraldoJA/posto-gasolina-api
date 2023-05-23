@@ -1,10 +1,18 @@
 package br.com.postogasolina.config;
 
+import javax.swing.SwingUtilities;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import br.com.postogasolina.gui.TelaCard;
+import br.com.postogasolina.service.AbastecimentoService;
+import br.com.postogasolina.service.BombaService;
+import br.com.postogasolina.service.CombustivelService;
+import br.com.postogasolina.service.PostoService;
+import br.com.postogasolina.service.VeiculoService;
 import br.com.postogasolina.test.OrdemExecucaoTests;
 
 /**
@@ -19,7 +27,7 @@ public class TestConfig {
 
 	@Autowired
 	private OrdemExecucaoTests ordemExecucaoTests;
-/*	
+	
 	@Autowired
 	private PostoService postoService;
 	
@@ -34,15 +42,15 @@ public class TestConfig {
 	
 	@Autowired
 	private AbastecimentoService abastecimentoService;
-	*/
+	
 	@Bean
 	public void instanciaBD() {
 	
 		this.ordemExecucaoTests.iniciarTestIntegracaoBaseDados();
 		
-		//iniciarTela();
+		iniciarTela();
 	}
-	/*
+	
 	private void iniciarTela() {
 		
 		System.setProperty("java.awt.headless", "false");
@@ -53,5 +61,5 @@ public class TestConfig {
 			frame.setVisible(true);
 		});
 	}
-	*/
+	
 }
