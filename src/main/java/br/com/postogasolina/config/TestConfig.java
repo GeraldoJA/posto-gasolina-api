@@ -1,5 +1,7 @@
 package br.com.postogasolina.config;
 
+import java.util.List;
+
 import javax.swing.SwingUtilities;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +14,8 @@ import br.com.postogasolina.service.AbastecimentoService;
 import br.com.postogasolina.service.BombaService;
 import br.com.postogasolina.service.CombustivelService;
 import br.com.postogasolina.service.PostoService;
+import br.com.postogasolina.service.StartBDService;
 import br.com.postogasolina.service.VeiculoService;
-import br.com.postogasolina.test.OrdemExecucaoTests;
 
 /**
  * Interface para acessos aos métodos JPA referente à entidade Veículo.
@@ -26,7 +28,7 @@ import br.com.postogasolina.test.OrdemExecucaoTests;
 public class TestConfig {
 
 	@Autowired
-	private OrdemExecucaoTests ordemExecucaoTests;
+	private StartBDService startBDService;
 	
 	@Autowired
 	private PostoService postoService;
@@ -46,9 +48,11 @@ public class TestConfig {
 	@Bean
 	public void instanciaBD() {
 	
-		this.ordemExecucaoTests.iniciarTestIntegracaoBaseDados();
+		startBDService.iniciarBancoDeDados();
 		
 		iniciarTela();
+		
+		resumoSimulacao();
 	}
 	
 	private void iniciarTela() {
@@ -60,6 +64,18 @@ public class TestConfig {
 			frame.setDefaultCloseOperation(TelaCard.EXIT_ON_CLOSE);
 			frame.setVisible(true);
 		});
+	}
+	
+	private void resumoSimulacao() {
+		
+		List<String> list = abastecimentoService.relatorioCompletoAbastecimento();
+
+		for (String string : list) {
+			System.out.println(string);
+		}
+		
+		System.out.println(" ");
+		System.out.println(" ");
 	}
 	
 }
