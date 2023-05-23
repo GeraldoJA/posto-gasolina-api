@@ -21,10 +21,10 @@ class CombustivelServiceTest {
 	@DisplayName("Deve criar um combustível.")
 	public void deveCriarUmCombustivel() {
 		
-		Combustivel c1 = new Combustivel(null, TipoCombustivel.GASOLINA_COMUM);
-		c1 = service.create(c1);
+		Combustivel obj = new Combustivel(null, TipoCombustivel.GASOLINA_COMUM);
+		obj = service.create(obj);
 	
-		Assertions.assertNotNull(c1);
+		Assertions.assertNotNull(obj);
 	}
 	
 	@Test
