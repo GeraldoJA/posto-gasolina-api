@@ -36,7 +36,7 @@ public class TelaCombustivel extends JPanel {
 		
 		this.combustivelService = combustivelService;
 		
-		JLabel lblTitulo = new JLabel("COMBUSTÕVEL");
+		JLabel lblTitulo = new JLabel("COMBUST√çVEL");
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JButton btnNewButton = new JButton("Cadastrar");
@@ -46,7 +46,7 @@ public class TelaCombustivel extends JPanel {
 			}
 		});
 		
-		JLabel lblNewLabel = new JLabel("Selecione o CombustÌvel:");
+		JLabel lblNewLabel = new JLabel("Selecione o Combust√≠vel:");
 		
 		comboBox = new JComboBox<TipoCombustivel>();
 		inicarComboBox();
@@ -88,7 +88,7 @@ public class TelaCombustivel extends JPanel {
 		Combustivel combustivel = new Combustivel(null, tipo);
 		
 		if( list.contains(combustivel) ) {
-			JOptionPane.showMessageDialog(null, "CombustÌvel j· cadastrado", "ERRO", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "CombustÔøΩvel jÔøΩ cadastrado", "ERRO", JOptionPane.WARNING_MESSAGE);
 		}else {
 			combustivelService.create(combustivel);
 			String mensagem = combustivel.getTipoCombustivel() + " cadastrado com sucesso";

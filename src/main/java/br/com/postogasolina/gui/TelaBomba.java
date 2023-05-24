@@ -66,9 +66,9 @@ public class TelaBomba extends JPanel {
 		
 		JLabel lblNewLabel = new JLabel("Posto: ");
 		
-		JLabel lblNewLabel_1 = new JLabel("Combustível: ");
+		JLabel lblNewLabel_1 = new JLabel("CombustÃ­vel: ");
 		
-		JLabel lblNewLabel_2 = new JLabel("Preço: ");
+		JLabel lblNewLabel_2 = new JLabel("PreÃ§o: ");
 		
 		JLabel lblNewLabel_3 = new JLabel("Tempo litro/minuto:");
 		
@@ -86,7 +86,7 @@ public class TelaBomba extends JPanel {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				if( !filtrar(e, true) )
-					e.consume();   //consume não faz nada
+					e.consume();   //consume nï¿½o faz nada
 			}
 		});
 		tfPreco.setColumns(10);
@@ -96,7 +96,7 @@ public class TelaBomba extends JPanel {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				if( !filtrar(e, false) )
-					e.consume();   //consume não faz nada
+					e.consume();   //consume nï¿½o faz nada
 			}
 		});
 		tfTempo.setColumns(10);
@@ -214,7 +214,7 @@ public class TelaBomba extends JPanel {
 		Bomba bomba;
 		
 		if( tfPreco.getText().equals("") )
-			JOptionPane.showMessageDialog(null, "Precisa informar o preço", "ERRO", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Precisa informar o preï¿½o", "ERRO", JOptionPane.WARNING_MESSAGE);
 		else if( tfTempo.getText().equals("") ) 
 			JOptionPane.showMessageDialog(null, "Precisa informar o tempo de abastecimento por litro", "ERRO", JOptionPane.WARNING_MESSAGE);
 		else {

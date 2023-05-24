@@ -50,10 +50,10 @@ public class TelaCard extends JFrame {
 		//Menu 1
 		JMenu menu1 = new JMenu("Cadastrar");
 		
-		JMenuItem menu1Veiculos = new JMenuItem("Veículo");
+		JMenuItem menu1Veiculos = new JMenuItem("VeÃ­culo");
 		menu1Veiculos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mudarCard("Veículo");
+				mudarCard("VeÃ­culo");
 			}
 		});
 		menu1.add(menu1Veiculos);
@@ -85,20 +85,20 @@ public class TelaCard extends JFrame {
 		});
 		menu2.add(menu2Abastecer);
 		
-		JMenuItem menu2Relatorio = new JMenuItem("Relatório");
+		JMenuItem menu2Relatorio = new JMenuItem("RelatÃ³rio");
 		menu2Relatorio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mudarCard("Relatório");
+				mudarCard("RelatÃ³rio");
 			}
 		});
 		menu2.add(menu2Relatorio);
 		
 		//Menu 3
 		JMenu menu3 = new JMenu("Ajuda");
-		JMenuItem menu3Sobre = new JMenuItem("Informação");
+		JMenuItem menu3Sobre = new JMenuItem("InformaÃ§Ã£o");
 		menu3Sobre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mudarCard("Informação");
+				mudarCard("InformaÃ§Ã£o");
 			}
 		});
 		menu3.add(menu3Sobre);
@@ -145,7 +145,7 @@ public class TelaCard extends JFrame {
 		
 		switch (card) {
 		
-			case "Veículo":
+			case "VeÃ­culo":
 				c.show( painelCards, "cardVeiculo");
 				break;
 				
@@ -163,11 +163,11 @@ public class TelaCard extends JFrame {
 				cardAbastecer.iniciarCombos();
 				break;
 				
-			case "Relatório":
+			case "RelatÃ³rio":
 				c.show( painelCards, "cardRelatorio");
 				break;		
 			
-			case "Informação":
+			case "InformaÃ§Ã£o":
 				c.show( painelCards, "cardSobre");
 				break;	
 				

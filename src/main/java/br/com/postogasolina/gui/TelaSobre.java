@@ -16,10 +16,10 @@ public class TelaSobre extends JPanel {
 	 */
 	public TelaSobre() {
 		
-		JLabel lblTitulo = new JLabel("INFORMA«√O");
+		JLabel lblTitulo = new JLabel("INFORMA√á√ÉO");
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
-		JLabel lblNewLabel = new JLabel("Teste de seleÁ„o Desenvolvedor JAVA");
+		JLabel lblNewLabel = new JLabel("Teste de sele√ß√£o Desenvolvedor JAVA");
 		
 		JLabel lblNewLabel_1 = new JLabel("LOGUS TECNOLOGIA");
 		

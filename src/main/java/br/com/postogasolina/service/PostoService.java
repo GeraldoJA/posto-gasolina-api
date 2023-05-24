@@ -22,7 +22,7 @@ import br.com.postogasolina.service.exception.ObjectNotFoundException;
 public class PostoService {
 
 	@Autowired
-	private PostoRepository postoRepository;
+	private PostoRepository repository;
 	
 	/**
 	 * Busca um Posto por Id
@@ -31,9 +31,9 @@ public class PostoService {
 	 * @return Posto
 	 */
 	public Posto findById( Long id )  {	
-		Optional<Posto> obj = postoRepository.findById(id);	
+		Optional<Posto> obj = repository.findById(id);	
 		return obj.orElseThrow( () -> new ObjectNotFoundException(
-				"Objeto n„o encontrato! Id: " + id + ", Tipo: " + Posto.class.getName()) );
+				"Objeto n√£o encontrato! Id: " + id + ", Tipo: " + Posto.class.getName()) );
 	}
 	
 	/**
@@ -42,7 +42,7 @@ public class PostoService {
 	 * @return List<Posto> 
 	 */
 	public List<Posto> findAll() {
-		return postoRepository.findAll();
+		return repository.findAll();
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class PostoService {
 	 * @return Posto
 	 */
 	public Posto create( Posto posto ) {
-		return this.postoRepository.save(posto);
+		return this.repository.save(posto);
 	}
 	
 	/**
@@ -68,7 +68,7 @@ public class PostoService {
 		obj.setBombas(posto.getBombas());
 		obj.setNome(posto.getNome());
 		
-		return postoRepository.save(obj);
+		return repository.save(obj);
 	}
 	
 	/**
@@ -79,10 +79,10 @@ public class PostoService {
 	public void delete( Long id ) {
 		findById(id);
 		try {
-			postoRepository.deleteById(id);
+			repository.deleteById(id);
 		} catch ( DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException
-			( "Posto n„o pode ser deletado! Possue Bombas associadas." );
+			( "Posto n√£o pode ser deletado! Possue Abastecimentos associados." );
 		}
 	}
 

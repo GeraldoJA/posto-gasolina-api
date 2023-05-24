@@ -152,7 +152,7 @@ public class TelaAbastecer extends JPanel {
 		if( !litros.equals("") )
 			qtdLitros = Double.parseDouble( txQtdLitros.getText() );
 		
-		if( qtdLitros < 0 ) 
+		if( qtdLitros <= 0 ) 
 			JOptionPane.showMessageDialog(null, "Precisa informar a quantidade de litros", "ERRO", JOptionPane.WARNING_MESSAGE);
 		else if( qtdLitros > (veiculo.getCapacidadeTanque() - veiculo.getQtdCombustivel()) ) 
 			JOptionPane.showMessageDialog(null, "Quantidade de litros além da capacidade", "ERRO", JOptionPane.WARNING_MESSAGE);

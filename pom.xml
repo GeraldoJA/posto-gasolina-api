@@ -49,6 +49,19 @@
 	    <artifactId>jasperreports</artifactId>
 	    <version>6.20.5</version>
 	</dependency>
+	
+	<!-- INICIO - dependencias Swagger -->
+	<dependency>
+	    <groupId>io.springfox</groupId>
+	    <artifactId>springfox-boot-starter</artifactId>
+	    <version>3.0.0</version>
+	</dependency>
+	<dependency>
+	    <groupId>io.springfox</groupId>
+	    <artifactId>springfox-swagger-ui</artifactId>
+	    <version>3.0.0</version>
+	</dependency>
+	<!-- FIM - dependencias Swagger -->
 		
   </dependencies>
   
