@@ -40,7 +40,7 @@ public class Abastecimento {
 
 	public Abastecimento() {
 		super();
-		// TODO Auto-generated constructor stub
+		// Auto-generated constructor stub
 	}
 	
 	public Abastecimento(Long id, Date date, Double quantidadeLitros, Double valor, Veiculo veiculo, Bomba bomba) {

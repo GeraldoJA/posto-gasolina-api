@@ -43,7 +43,14 @@
   		<version>1.18.24</version>
   	</dependency>
   	
-  	<!-- INICIO - dependencias Swagger -->
+	<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
+	<dependency>
+	    <groupId>net.sf.jasperreports</groupId>
+	    <artifactId>jasperreports</artifactId>
+	    <version>6.20.5</version>
+	</dependency>
+	
+	<!-- INICIO - dependencias Swagger -->
 	<dependency>
 	    <groupId>io.springfox</groupId>
 	    <artifactId>springfox-boot-starter</artifactId>

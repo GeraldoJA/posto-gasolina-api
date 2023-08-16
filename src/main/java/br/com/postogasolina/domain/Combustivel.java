@@ -29,7 +29,7 @@ public class Combustivel {
 	 */
 	public Combustivel() {
 		super();
-		// TODO Auto-generated constructor stub
+		// Auto-generated constructor stub
 	}
 	
 	/**

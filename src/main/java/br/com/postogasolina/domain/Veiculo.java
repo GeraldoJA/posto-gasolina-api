@@ -48,7 +48,7 @@ public class Veiculo implements Serializable {
 	 */
 	public Veiculo() {
 		super();
-		// TODO Auto-generated constructor stub
+		// Auto-generated constructor stub
 	}
 	
 	/**

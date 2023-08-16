@@ -39,7 +39,7 @@ public class Posto implements Serializable {
 	 */
 	public Posto() {
 		super();
-		// TODO Auto-generated constructor stub
+		// Auto-generated constructor stub
 	}
 	
 	/**
